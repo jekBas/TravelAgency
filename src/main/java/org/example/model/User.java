@@ -1,13 +1,13 @@
 package org.example.model;
 
-import lombok.Data;
+//import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
-@Data
+//@Data
 @Entity
 @Table(name = "users")
 public class User {
