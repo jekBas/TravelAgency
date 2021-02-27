@@ -39,3 +39,4 @@ buildNumber.properties
 
 /.idea/
 /TravelAgency.iml
+src/main/resources/application.properties
