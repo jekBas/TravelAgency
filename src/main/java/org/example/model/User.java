@@ -1,13 +1,13 @@
 package org.example.model;
 
-//import lombok.Data;
+import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
-//@Data
+@Data
 @Entity
 @Table(name = "users")
 public class User {
@@ -42,11 +42,11 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password, Role roles) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        this.roles = Role.USER;
     }
 }
