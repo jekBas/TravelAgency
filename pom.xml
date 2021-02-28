@@ -49,6 +49,13 @@
       <version>${security.version}</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>5.3.4.RELEASE</version>
+    </dependency>
+
     <!-- Hibernate core -->
     <dependency>
       <groupId>org.hibernate.orm</groupId>
