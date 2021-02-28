@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import java.util.List;
@@ -19,6 +20,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
+    @Transactional
     public void saveUser(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
@@ -34,7 +36,7 @@ public class UserDaoImpl implements UserDao{
     public List<User> getAllUsers() {
         Session session = sessionFactory.getCurrentSession();
 
-        Query query = session.createQuery("FROM users", User.class);
+        Query query = session.createQuery("FROM user", User.class);//single form name
         return query.getResultList();
     }
 
