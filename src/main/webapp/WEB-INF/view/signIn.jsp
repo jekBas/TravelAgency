@@ -20,11 +20,10 @@
         <%@include file="/WEB-INF/css/style.css"%>
     </style>
 
-<%--    <link href="${pageContext.request.contextPath}/css/bootstrap.css">--%>
+    <%--    <link href="${pageContext.request.contextPath}/css/bootstrap.css">--%>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
 
 
 </head>
@@ -35,40 +34,47 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-            <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
+            <c:if test="${!(pageContext.request.isUserInRole('USER') || pageContext.request.isUserInRole('ADMIN'))}">
+                <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
+            </c:if>
             <li><a href="${pageContext.request.contextPath}/aboutUs">About Us</a></li>
+            <c:if test="${(pageContext.request.isUserInRole('USER') || pageContext.request.isUserInRole('ADMIN'))}">
+                <li><a href="${pageContext.request.contextPath}/logout">log out</a></li>
+            </c:if>
+
+
         </ul>
     </div> <!--End of container-->
 </div> <!--End of header-->
 
-<div id="banner" style="background-image: url(https://images.creativemarket.com/0.1.0/ps/1422659/4122/2696/m1/fpnw/wm1/world-map-orange-.jpg?1467641527&s=235e067fec06b0fbd69c747d3d7236ac);">
+<div id="banner"
+     style="background-image: url(https://images.creativemarket.com/0.1.0/ps/1422659/4122/2696/m1/fpnw/wm1/world-map-orange-.jpg?1467641527&s=235e067fec06b0fbd69c747d3d7236ac);">
     <div class="container">
         <h1>FIND YOUR HOTEL</h1>
 
-<%--        <c:if test="${not empty errorMessge}"><div style="color:red; font-weight: bold; margin: 30px 0px;">${errorMessge}</div></c:if>--%>
+        <c:if test="${not empty errorMessage}">
+            <div style="color:red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
+        </c:if>
 
-<%--        <form:form action="${pageContext.request.contextPath}/signIn"  modelAttribute="user" method="post"--%>
-        <form:form name="signIn" action="/signIn" method="post"
-                   style="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto">
+        <c:if test="${!(pageContext.request.isUserInRole('USER') || pageContext.request.isUserInRole('ADMIN'))}">
+        <form name="signIn" action="/signIn" method="post"
+              style="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto">
 
-            <c:if test="${param.error != null}">
-                <i class="failed">Password is incorrect</i>
-            </c:if>
-            <c:if test="${param.logout != null}">
-                <i class="logout">you have been logged out</i>
-            </c:if>
+
             <br>
             <label for="Username">
                 Username:
                 <div>
-                    <input type="text" placeholder="FirstName" id="Username" name="username" style="border-radius: 5px;height: 38px;">
+                    <input type="text" placeholder="Username" id="Username" name="username" value=''
+                           style="border-radius: 5px;height: 38px;">
                 </div>
             </label>
             <br>
             <label for="Password">
                 Password:
                 <div>
-                    <input type="password" placeholder="Password" id="Password" name="password"  style="border-radius: 5px;height: 38px;">
+                    <input type="password" placeholder="Password" id="Password" name="password"
+                           style="border-radius: 5px;height: 38px;">
                 </div>
             </label>
 
@@ -76,14 +82,24 @@
             <br>
             <input name="submit" type="submit" value="Log in"
                    class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-<%--            <button  class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">Log in</button>--%>
-        </form:form>
+            <%--            <button  class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">Log in</button>--%>
+        </form>
+        </c:if>
 
 
     </div> <!--End of container-->
 </div> <!--End of banner-->
+
+
+<%--            <c:if test="${param.error != null}">--%>
+<%--                <i class="failed">Password is incorrect</i>--%>
+<%--            </c:if>--%>
+<%--            <c:if test="${param.logout != null}">--%>
+<%--                <i class="logout">you have been logged out</i>--%>
+<%--            </c:if>--%>
+
 
 <%--<form:form action="${pageContext.request.contextPath}/authenticateTheUser" method="post"--%>
 <%--           cssStyle="width: 400px; align-self: center">--%>

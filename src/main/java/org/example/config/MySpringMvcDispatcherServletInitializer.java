@@ -1,5 +1,6 @@
 package org.example.config;
 
+import org.example.config.security.SecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
@@ -7,7 +8,7 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[]{HibernateUtil.class};
+		return new Class[]{HibernateUtil.class, SecurityConfig.class};
 	}
 
 	@Override

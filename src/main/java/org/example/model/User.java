@@ -32,7 +32,7 @@ public class User {
     private String lastName;
 
     @Email(message = "Must be a valid e-mail address")
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String email;
 
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?$\\.&]{8,}$",
