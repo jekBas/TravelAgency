@@ -30,4 +30,5 @@ public class RegistrationController {
 
         return userService.saveUser(errors, user);
     }
+
 }
