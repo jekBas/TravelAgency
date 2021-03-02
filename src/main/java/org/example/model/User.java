@@ -22,21 +22,21 @@ public class User {
     @Pattern(regexp = "[A-Z][a-z]+(-[A-Z][a-z]+){0,1}",
             message = "Must start with a capital letter followed by one or more lowercase letters")
     @NotNull
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "username")
+    private String userName;
 
-    @NotNull
-    @Pattern(regexp = "[A-Z][a-z]+(-[A-Z][a-z]+){0,1}",
-            message = "Must start with a capital letter followed by one or more lowercase letters")
-    @Column(name = "last_name")
-    private String lastName;
+//    @NotNull
+//    @Pattern(regexp = "[A-Z][a-z]+(-[A-Z][a-z]+){0,1}",
+//            message = "Must start with a capital letter followed by one or more lowercase letters")
+//    @Column(name = "last_name")
+//    private String lastName;
 
     @Email(message = "Must be a valid e-mail address")
     @Column(name = "email",unique = true)
     private String email;
 
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?$\\.&]{8,}$",
-            message = "Must be minimum 8 characters, at least one uppercase, one lowercase, one number and one special character")
+            message = "Must be minimum 8 characters, at least  one uppercase, one lowercase, one number and one special character")
     @NotNull
     @Column(name = "password")
     private String password;
@@ -48,9 +48,8 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String userName, String email, String password) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.roles = Role.USER;

@@ -23,7 +23,7 @@ public class DemoController {
 
 	@RequestMapping("/aboutUs")
 	public String showInfoPage(){
-//		User user = new User("Name","Surname","testmail@gmail.com","Qwerty@1234");
+//		User user = new User("Nameadsadsa","testmaildsa@gmail.com","Qwerty@1234");
 //		userService.saveUser(user);
 
 		return "aboutUs";
