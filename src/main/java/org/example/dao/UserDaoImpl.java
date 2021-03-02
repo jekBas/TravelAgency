@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao{
     public List<User> getAllUsers() {
         Session session = sessionFactory.getCurrentSession();
 
-        Query query = session.createQuery("FROM user", User.class);//single form name
+        Query query = session.createQuery("From User");//single form name
         return query.getResultList();
     }
 
@@ -45,5 +45,13 @@ public class UserDaoImpl implements UserDao{
         Session session  = sessionFactory.getCurrentSession();
         User user = session.get(User.class, id);
         session.delete(user);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query =session.createQuery("FROM User  where userName = :name")
+                .setParameter("name",username);
+        return (User) query.getSingleResult();
     }
 }

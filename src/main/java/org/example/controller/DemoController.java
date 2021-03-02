@@ -26,6 +26,9 @@ public class DemoController {
 //		User user = new User("Nameadsadsa","testmaildsa@gmail.com","Qwerty@1234");
 //		userService.saveUser(user);
 
+		User user1 = userService.findByUsername("Nameadsadsa");
+		System.out.println(user1.getUserName());
+
 		return "aboutUs";
 	}
 }
