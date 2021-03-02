@@ -3,6 +3,7 @@ package org.example.dao;
 import org.example.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +23,19 @@ public class UserDaoImpl implements UserDao{
     @Override
     @Transactional
     public void saveUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.save(user);
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()){
+            transaction = session.beginTransaction();
+
+            session.persist(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
+        }
+
+//        Session session = sessionFactory.getCurrentSession();
+//        session.persist(user);
     }
 
     @Override
@@ -36,7 +48,7 @@ public class UserDaoImpl implements UserDao{
     public List<User> getAllUsers() {
         Session session = sessionFactory.getCurrentSession();
 
-        Query query = session.createQuery("From User");//single form name
+        Query query = session.createQuery("From User");
         return query.getResultList();
     }
 

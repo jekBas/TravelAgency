@@ -9,16 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserDao userDao;
 
-    @Transactional
+    @Autowired
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    @Override
     public void saveUser(User user) {
         userDao.saveUser(user);
     }
 
     @Override
-    @Transactional
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
