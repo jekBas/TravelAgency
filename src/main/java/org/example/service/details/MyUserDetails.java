@@ -1,5 +1,6 @@
 package org.example.service.details;
 
+import org.example.model.Role;
 import org.example.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

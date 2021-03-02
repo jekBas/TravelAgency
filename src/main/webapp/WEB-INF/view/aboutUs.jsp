@@ -9,6 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -35,13 +36,15 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-            <c:if test="${!(pageContext.request.isUserInRole('USER') || pageContext.request.isUserInRole('ADMIN'))}">
+            <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
-            </c:if>
+            </sec:authorize>
+
             <li><a href="${pageContext.request.contextPath}/aboutUs">About Us</a></li>
-            <c:if test="${(pageContext.request.isUserInRole('USER') || pageContext.request.isUserInRole('ADMIN'))}">
+
+            <sec:authorize access="isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/logout">log out</a></li>
-            </c:if>
+            </sec:authorize>
         </ul>
     </div> <!--End of container-->
 </div> <!--End of header-->
