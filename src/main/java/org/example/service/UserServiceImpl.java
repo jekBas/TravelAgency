@@ -4,6 +4,7 @@ import org.example.dao.UserDao;
 import org.example.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import java.util.List;
 
@@ -17,8 +18,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
-        userDao.saveUser(user);
+    public String saveUser(Errors errors, User user) {
+        if (errors.hasErrors()) {
+            return "redirect:/signUp";
+        } else {
+            userDao.saveUser(user);
+            return "redirect:/signIn";
+        }
     }
 
     @Override

@@ -1,12 +1,13 @@
 package org.example.service;
 
 import org.example.model.User;
+import org.springframework.validation.Errors;
 
 import java.util.List;
 
 public interface UserService {
 
-    void saveUser(User user);
+    String saveUser(Errors errors, User user);
 
     void updateUser(User user);
 
