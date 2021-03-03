@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    String saveUser(Errors errors, User user);
+    void saveUser(User user);
 
     void updateUser(User user);
 

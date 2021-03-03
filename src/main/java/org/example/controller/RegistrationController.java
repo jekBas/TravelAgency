@@ -5,6 +5,7 @@ import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,16 +20,25 @@ public class RegistrationController {
     private UserService userService;
 
     @GetMapping("/signUp")
-    public String showSignUpPage(){
+    public String showSignUpPage(Model model){
+        User user = new User();
+        model.addAttribute("user",user);
 
         return "signUp";
     }
 
     @PostMapping("/signUp")
-    public String registrationUser(@Valid @ModelAttribute User user, Errors errors, Model model) {
-        model.addAttribute("username", user.getUserName());
+    public String registrationUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model) {
+//        model.addAttribute("username", user.getUserName());
+        model.addAttribute("user",user);
 
-        return userService.saveUser(errors, user);
+        if(bindingResult.hasErrors()){
+            model.addAttribute("user",user);
+            return "signUp";
+        }
+
+        userService.saveUser(user);
+        return "signIn";
     }
 
 }

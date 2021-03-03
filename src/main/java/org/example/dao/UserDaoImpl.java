@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.exception.UserAlreadyExistException;
 import org.example.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,7 +30,7 @@ public class UserDaoImpl implements UserDao{
 
             session.persist(user);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (Exception e){
             if (transaction != null)
                 transaction.rollback();
         }

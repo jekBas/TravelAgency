@@ -18,13 +18,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String saveUser(Errors errors, User user) {
-        if (errors.hasErrors()) {
-            return "redirect:/signUp";
-        } else {
-            userDao.saveUser(user);
-            return "redirect:/signIn";
-        }
+    public void saveUser(User user) {
+//        if (errors.hasErrors()) {
+//            return "redirect:/signUp";
+//        } else {
+//            userDao.saveUser(user);
+//            return "redirect:/signIn";
+//        }
+        userDao.saveUser(user);
+
     }
 
     @Override
