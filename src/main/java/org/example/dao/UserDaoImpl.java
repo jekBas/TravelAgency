@@ -1,6 +1,5 @@
 package org.example.dao;
 
-import org.example.exception.UserAlreadyExistException;
 import org.example.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -96,5 +95,17 @@ public class UserDaoImpl implements UserDao{
         session.close();
 
         return user;
+    }
+
+    @Override
+    public List<User> findByEmailOrUsername(String email,String username) {
+        Session session = sessionFactory.openSession();
+        Query query =session.createQuery("FROM User  where email = :mail or userName = :name")
+                .setParameter("mail",email)
+                .setParameter("name", username);
+        List<User> users = query.getResultList();
+        session.close();
+
+        return users;
     }
 }

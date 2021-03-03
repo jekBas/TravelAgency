@@ -59,13 +59,15 @@
 
         <div> <h6 style="color: black;"> It'll take just few minutes</h6></div>
 <%--        <form name="signUp" action="/signUp"--%>
-        <form:form action="/signUp" method="post" modelAttribute="user"
-            cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto">
+        <form:form action="/signUp" method="post" modelAttribute="userDto"
+            cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto; width: 30%">
 
             <label for="Username">
                 <span class="tfsu">Firstname</span> <br>
                 <form:input type="text" path="firstName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                <br>
 <%--                <input type="text" placeholder="Firstname" id="Username" name="firstName"  style="border-radius: 5px;height: 38px;">--%>
+                <form:errors path="firstName" cssStyle="color: darkred"/>
             </label>
 
             <br>
@@ -73,7 +75,9 @@
             <label for="Username">
                 <span class="tfsu">Lastname</span> <br>
                 <form:input type="text" path="lastName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                <br>
 <%--                <input type="text" placeholder="Lastname"  name="lastName"  style="border-radius: 5px;height: 38px;">--%>
+                <form:errors path="lastName" cssStyle="color: darkred"/>
             </label>
 
             <br>
@@ -81,6 +85,8 @@
             <label for="Username">
                 <span class="tfsu">Username</span> <br>
                 <form:input type="text" path="userName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                <br>
+                <form:errors path="userName" cssStyle="color: darkred"/>
 
 <%--                <input type="text" placeholder="Username"  name="username"  style="border-radius: 5px;height: 38px;">--%>
             </label>
@@ -91,15 +97,31 @@
                 <div>
                     <form:input type="text" path="email" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
 <%--                    <input type="text" placeholder="example@gmail.com" id="Username1" name="email" style="border-radius: 5px;height: 38px;"; >--%>
+                    <br>
+                    <form:errors path="email" cssStyle="color: darkred"/>
                 </div>
             </label>
             <br>
             <label for="Username">
                 <span class="tfsu">New password</span> <br>
                 <form:input type="password" path="password" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                <br>
+                <form:errors path="password" cssStyle="color: darkred"/>
 
 <%--                <input type="password" placeholder="Password" id="passwordsiup" name="password" style="border-radius: 5px;height: 38px;">--%>
             </label>
+
+            <br>
+
+            <label for="Username">
+                <span class="tfsu">New password</span> <br>
+                <form:input type="password" path="confirmPassword" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                <br>
+                <form:errors path="confirmPassword" cssStyle="color: darkred"/>
+
+                    <%--                <input type="password" placeholder="Password" id="passwordsiup" name="password" style="border-radius: 5px;height: 38px;">--%>
+            </label>
+
             <br>
 <%--            <label for="Username">--%>
 <%--                <span class="tfsu">Confirm password</span> <br>--%>

@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.model.User;
-import org.springframework.validation.Errors;
 
 import java.util.List;
 
@@ -18,4 +17,5 @@ public interface UserService {
     void deleteUser(Long id);
 
     User findByUsername(String username);
+    List<User> findByEmailOrUsername(String email,String username);
 }

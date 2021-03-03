@@ -1,12 +1,12 @@
 package org.example.controller;
 
+import org.example.dto.UserDto;
 import org.example.model.User;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,23 +21,38 @@ public class RegistrationController {
 
     @GetMapping("/signUp")
     public String showSignUpPage(Model model){
-        User user = new User();
-        model.addAttribute("user",user);
+        UserDto userDto = new UserDto();
+        model.addAttribute("userDto",userDto);
 
         return "signUp";
     }
 
     @PostMapping("/signUp")
-    public String registrationUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model) {
+    public String registrationUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
 //        model.addAttribute("username", user.getUserName());
-        model.addAttribute("user",user);
+        model.addAttribute("userDto",userDto);
+
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("user",user);
+            model.addAttribute("userDto",userDto);
             return "signUp";
         }
 
-        userService.saveUser(user);
+
+        if(userService.findByEmailOrUsername(userDto.getEmail(),userDto.getUserName()) != null){
+            bindingResult.rejectValue("userName", "userDto.userName","An account already exists for this email or username");
+            model.addAttribute("userDto", userDto);
+            return "signUp";
+        }
+
+//        if(userService.findByUsername(userDto.getUserName()) != null){
+//            bindingResult.rejectValue("userName", "userDto.userName","An account already exists for this username");
+//            model.addAttribute("userDto", userDto);
+//            return "signUp";
+//
+//        }else userService.saveUser(new User(userDto));
+
+
         return "signIn";
     }
 

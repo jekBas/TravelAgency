@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages="org.example")
-public class DemoAppConfig implements WebMvcConfigurer {
+public class  DemoAppConfig implements WebMvcConfigurer {
 
 	@Bean
 	public InternalResourceViewResolver getInternalResourceViewResolver() {

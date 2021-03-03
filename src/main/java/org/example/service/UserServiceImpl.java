@@ -19,14 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-//        if (errors.hasErrors()) {
-//            return "redirect:/signUp";
-//        } else {
-//            userDao.saveUser(user);
-//            return "redirect:/signIn";
-//        }
-        userDao.saveUser(user);
-
+            userDao.saveUser(user);
     }
 
     @Override
@@ -52,5 +45,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
+    }
+
+    @Override
+    public List<User> findByEmailOrUsername(String email,String username) {
+        return userDao.findByEmailOrUsername(email,username);
     }
 }
