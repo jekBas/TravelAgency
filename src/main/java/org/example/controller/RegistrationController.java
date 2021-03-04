@@ -39,7 +39,7 @@ public class RegistrationController {
         }
 
 
-        if(userService.findByEmailOrUsername(userDto.getEmail(),userDto.getUserName()) != null){
+        if(!userService.findByEmailOrUsername(userDto.getEmail(),userDto.getUserName()).isEmpty()){
             bindingResult.rejectValue("userName", "userDto.userName","An account already exists for this email or username");
             model.addAttribute("userDto", userDto);
             return "signUp";

@@ -3,14 +3,17 @@ package org.example.service;
 import org.example.dao.UserDao;
 import org.example.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Errors;
 
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserDao userDao) {
@@ -19,11 +22,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-            userDao.saveUser(user);
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        userDao.saveUser(user);
     }
 
     @Override
     public void updateUser(User user) {
+
         userDao.updateUser(user);
     }
 
