@@ -34,6 +34,9 @@
     <div class="container">
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
+            <sec:authorize access="hasAuthority('MANAGER')">
+                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
+            </sec:authorize>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>

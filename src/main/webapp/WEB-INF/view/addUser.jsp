@@ -7,8 +7,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Woland
-  Date: 27.02.2021
-  Time: 0:42
+  Date: 05.03.2021
+  Time: 3:30
   To change this template use File | Settings | File Templates.
 --%>
 <html>
@@ -35,6 +35,9 @@
     <div class="container">
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
+            <sec:authorize access="hasAuthority('MANAGER')">
+                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
+            </sec:authorize>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
@@ -58,15 +61,15 @@
         </div>
 
         <div> <h6 style="color: black;"> It'll take just few minutes</h6></div>
-<%--        <form name="signUp" action="/signUp"--%>
-        <form:form action="/signUp" method="post" modelAttribute="userDto"
-            cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto; width: 30%">
+        <%--        <form name="signUp" action="/signUp"--%>
+        <form:form action="/addUser" method="post" modelAttribute="userDto"
+                   cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto; width: 30%">
 
             <label for="Username">
                 <span class="tfsu">Firstname</span> <br>
                 <form:input type="text" path="firstName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
                 <br>
-<%--                <input type="text" placeholder="Firstname" id="Username" name="firstName"  style="border-radius: 5px;height: 38px;">--%>
+                    <%--                <input type="text" placeholder="Firstname" id="Username" name="firstName"  style="border-radius: 5px;height: 38px;">--%>
                 <form:errors path="firstName" cssStyle="color: darkred"/>
             </label>
 
@@ -76,7 +79,7 @@
                 <span class="tfsu">Lastname</span> <br>
                 <form:input type="text" path="lastName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
                 <br>
-<%--                <input type="text" placeholder="Lastname"  name="lastName"  style="border-radius: 5px;height: 38px;">--%>
+                    <%--                <input type="text" placeholder="Lastname"  name="lastName"  style="border-radius: 5px;height: 38px;">--%>
                 <form:errors path="lastName" cssStyle="color: darkred"/>
             </label>
 
@@ -88,7 +91,7 @@
                 <br>
                 <form:errors path="userName" cssStyle="color: darkred"/>
 
-<%--                <input type="text" placeholder="Username"  name="username"  style="border-radius: 5px;height: 38px;">--%>
+                    <%--                <input type="text" placeholder="Username"  name="username"  style="border-radius: 5px;height: 38px;">--%>
             </label>
 
             <br>
@@ -96,7 +99,7 @@
                 <span class="tfsu">Mail</span> <br>
                 <div>
                     <form:input type="text" path="email" placeholder="Email" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
-<%--                    <input type="text" placeholder="example@gmail.com" id="Username1" name="email" style="border-radius: 5px;height: 38px;"; >--%>
+                        <%--                    <input type="text" placeholder="example@gmail.com" id="Username1" name="email" style="border-radius: 5px;height: 38px;"; >--%>
                     <br>
                     <form:errors path="email" cssStyle="color: darkred"/>
                 </div>
@@ -108,7 +111,7 @@
                 <br>
                 <form:errors path="password" cssStyle="color: darkred"/>
 
-<%--                <input type="password" placeholder="Password" id="passwordsiup" name="password" style="border-radius: 5px;height: 38px;">--%>
+                    <%--                <input type="password" placeholder="Password" id="passwordsiup" name="password" style="border-radius: 5px;height: 38px;">--%>
             </label>
 
             <br>
@@ -124,15 +127,13 @@
 
             <br>
 
-            <sec:authorize access="hasRole('MANAGER')">
-        <label for="Role">
-            <span class="tfsu">New password</span> <br>
-            <form:select name="roles"  path="role">
-                <form:option value="${roles}"> --Choose role--</form:option>
-                <form:options items="${roles}"></form:options>
-            </form:select>
-        </label>
-            </sec:authorize>
+                <label for="Role">
+                    <span class="tfsu">New password</span> <br>
+                    <form:select name="roles"  path="role">
+                        <form:option value="${roles}"> --Choose role--</form:option>
+                        <form:options items="${roles}"></form:options>
+                    </form:select>
+                </label>
 
             <input  class="form-control btn" name="submit" type="submit" value="Confirm" style="background-color: coral;width:80px;margin-bottom: 8px;margin-top: 8px;">
             <br>

@@ -15,28 +15,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 @Controller
-public class RegistrationController {
+public class AddUserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/signUp")
-    public String showSignUpPage(Model model) {
+
+    @GetMapping("/addUser")
+    public String showAddUserPage(Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("userDto", userDto);
-        return "signUp";
+        return "addUser";
     }
 
-    @PostMapping("/signUp")
+    @PostMapping("/addUser")
     public String registrationUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
 //        model.addAttribute("username", user.getUserName());
         model.addAttribute("userDto", userDto);
-        model.addAttribute("roles",Role.values());
+        model.addAttribute("roles", Role.values());
 
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("userDto", userDto);
-            return "signUp";
+            return "addUser";
         }
 
 
@@ -44,7 +45,7 @@ public class RegistrationController {
             bindingResult.rejectValue("userName", "userDto.userName", "An account already exists for this email or username");
             model.addAttribute("userDto", userDto);
 
-            return "signUp";
+            return "addUser";
 
         } else userService.saveUser(new User(userDto));
 
@@ -58,5 +59,4 @@ public class RegistrationController {
 
         return "signIn";
     }
-
 }

@@ -1,5 +1,6 @@
 package org.example.config.security;
 
+import org.example.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,8 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/", "/aboutUs", "/signIn").permitAll()
-                    .antMatchers("/signUp").hasRole("MANAGER")
                     .antMatchers("/signUp").not().fullyAuthenticated()
+                    .antMatchers("/addUser").hasAuthority("MANAGER")
+//                    .antMatchers("/signUp").not().fullyAuthenticated()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
