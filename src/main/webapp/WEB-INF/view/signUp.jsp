@@ -95,7 +95,7 @@
             <label for="Username">
                 <span class="tfsu">Mail</span> <br>
                 <div>
-                    <form:input type="text" path="email" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                    <form:input type="text" path="email" placeholder="Email" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
 <%--                    <input type="text" placeholder="example@gmail.com" id="Username1" name="email" style="border-radius: 5px;height: 38px;"; >--%>
                     <br>
                     <form:errors path="email" cssStyle="color: darkred"/>
@@ -103,8 +103,8 @@
             </label>
             <br>
             <label for="Username">
-                <span class="tfsu">New password</span> <br>
-                <form:input type="password" path="password" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                <span class="tfsu">Password</span> <br>
+                <form:input type="password" path="password" placeholder="Password" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
                 <br>
                 <form:errors path="password" cssStyle="color: darkred"/>
 
@@ -114,20 +114,25 @@
             <br>
 
             <label for="Username">
-                <span class="tfsu">New password</span> <br>
-                <form:input type="password" path="confirmPassword" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                <span class="tfsu">Confirm pasword</span> <br>
+                <form:input type="password" path="confirmPassword" placeholder="confirm pass" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
                 <br>
-                <form:errors path="confirmPassword" cssStyle="color: darkred"/>
+                <form:errors path="confirmPassword" cssStyle="color: #8b0000"/>
 
                     <%--                <input type="password" placeholder="Password" id="passwordsiup" name="password" style="border-radius: 5px;height: 38px;">--%>
             </label>
 
             <br>
-<%--            <label for="Username">--%>
-<%--                <span class="tfsu">Confirm password</span> <br>--%>
-<%--                <input type="password" placeholder="Confirm password" id="cpassword" name="cpassword" style="border-radius: 5px;height: 38px;">--%>
-<%--            </label>--%>
-<%--            <br>--%>
+
+            <sec:authorize access="hasRole('MANAGER')">
+        <label for="Role">
+            <span class="tfsu">New password</span> <br>
+            <form:select name="roles"  path="role">
+                <form:option value="${RO}"> --Choose role--</form:option>
+                <form:options items="${roles}"></form:options>
+            </form:select>
+        </label>
+            </sec:authorize>
 
             <input  class="form-control btn" name="submit" type="submit" value="Confirm" style="background-color: coral;width:80px;margin-bottom: 8px;margin-top: 8px;">
             <br>

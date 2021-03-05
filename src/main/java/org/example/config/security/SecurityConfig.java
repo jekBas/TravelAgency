@@ -31,7 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
 
-
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
@@ -64,19 +63,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests()
-                    .antMatchers("/", "/aboutUs","/signIn").permitAll()
+                    .authorizeRequests()
+                    .antMatchers("/", "/aboutUs", "/signIn").permitAll()
+                    .antMatchers("/signUp").hasRole("MANAGER")
                     .antMatchers("/signUp").not().fullyAuthenticated()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/signIn")
-                .defaultSuccessUrl("/")
-                .failureUrl("/signIn?error=true")
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/signIn?error=true")
                 .and()
-                .logout()
-                .logoutSuccessUrl("/signIn?logout=true")
-                .invalidateHttpSession(true)
+                    .logout()
+                    .logoutSuccessUrl("/signIn?logout=true")
+                    .invalidateHttpSession(true)
                     .permitAll();
     }
 

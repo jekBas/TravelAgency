@@ -49,7 +49,10 @@ public class User {
         this.userName = userDto.getUserName();
         this.password = userDto.getPassword();
         this.email = userDto.getEmail();
-        this.roles = userDto.getRole();
+        if(userDto.getRole() == null){
+            this.roles = Role.USER;
+        }else this.roles = userDto.getRole();
+
     }
 
     public User(String userName, String firstName, String lastName, String email, String password) {

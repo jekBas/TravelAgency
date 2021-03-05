@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.dao.UserDao;
+import org.example.model.Role;
 import org.example.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,8 +13,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserDao userDao) {
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userDao.saveUser(user);
     }
