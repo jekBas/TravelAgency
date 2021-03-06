@@ -41,7 +41,7 @@ public class AddUserController {
         }
 
 
-        if (!userService.findByEmailOrUsername(userDto.getEmail(), userDto.getUserName()).isEmpty()) {
+        if (!userService.checkByEmailAndUsername(userDto.getEmail(), userDto.getUserName()).isEmpty()) {
             bindingResult.rejectValue("userName", "userDto.userName", "An account already exists for this email or username");
             model.addAttribute("userDto", userDto);
 
@@ -49,12 +49,6 @@ public class AddUserController {
 
         } else userService.saveUser(new User(userDto));
 
-
-//        if(userService.findByUsername(userDto.getUserName()) != null){
-//            bindingResult.rejectValue("userName", "userDto.userName","An account already exists for this username");
-//            model.addAttribute("userDto", userDto);
-//            return "signUp";
-//
 
 
         return "signIn";

@@ -98,7 +98,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public List<User> findByEmailOrUsername(String email,String username) {
+    public List<User> checkByEmailAndUsername(String email,String username) {
         Session session = sessionFactory.openSession();
         Query query =session.createQuery("FROM User  where email = :mail or userName = :name")
                 .setParameter("mail",email)
