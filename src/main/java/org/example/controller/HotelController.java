@@ -60,6 +60,7 @@ public class HotelController {
     public String showHotels(Model model) {
         List<Hotel> hotels = hotelService.getAllHotels();
         model.addAttribute("hotels",hotels);
+        model.addAttribute("country",Country.values());
         return "listHotels";
     }
 
@@ -70,6 +71,15 @@ public class HotelController {
 
         return "redirect:/hotel/list";
     }
+
+    @GetMapping("/filteredList")
+    public String showHotelsByCountry(@RequestParam String country, Model model) {
+        List<Hotel> hotels = hotelService.getAllHotelsInTheCountry(country);
+        model.addAttribute("hotels",hotels);
+        model.addAttribute("country",Country.values());
+        return "listHotels";
+    }
+
 }
 
 
