@@ -58,58 +58,49 @@
 <div id="banner"
      style="background-image: url(https://images.creativemarket.com/0.1.0/ps/1422659/4122/2696/m1/fpnw/wm1/world-map-orange-.jpg?1467641527&s=235e067fec06b0fbd69c747d3d7236ac);">
     <div class="container">
-        <%--        <h1>FIND YOUR HOTEL</h1>--%>
-
-<%--        <div id="content">--%>
-<%--            <table>--%>
-<%--                <tr>--%>
-<%--                    <th>First name</th>--%>
-<%--                    <th>Last name</th>--%>
-<%--                    <th>email</th>--%>
-<%--                </tr>--%>
-<%--                <c:forEach var="customers" items="${customers}">--%>
-
-<%--                    <tr>--%>
-<%--                        <td>${customers.firstName}</td>--%>
-<%--                        <td>${customers.lastName}</td>--%>
-<%--                        <td>${customers.email}</td>--%>
-<%--                    </tr>--%>
-
-<%--                </c:forEach>--%>
+        <h1>Customers</h1>
 
 
-<%--            </table>--%>
 
-            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">email</th>
+            </tr>
+            </thead>
 
-                <table class="table table-dark table-hover">
-                    <thead>
+        </table>
+        <div class="table table-dark table-striped"
+             style="position: relative;
+                      height: 200px;
+                       overflow: auto;
+                         display: block; color: #4e555b;opacity: 0.85; margin: auto">
+
+            <table class="table table-dark table-hover">
+                <thead>
+                <c:forEach var="customers" items="${customers}">
+
                     <tr>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">email</th>
+                        <td>${customers.firstName}</td>
+                        <td>${customers.lastName}</td>
+                        <td>${customers.email}</td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="customers" items="${customers}">
 
-                        <tr>
-                            <td>${customers.firstName}</td>
-                            <td>${customers.lastName}</td>
-                            <td>${customers.email}</td>
-                        </tr>
+                </c:forEach>
+                </thead>
 
-                    </c:forEach>
+                </thead>
 
-                    </tbody>
-                </table>
+            </table>
 
-            </div>
+        </div>
+
+    </div>
 
 
-
-
-    </div> <!--End of container-->
+</div> <!--End of container-->
 </div> <!--End of banner-->
 
 
