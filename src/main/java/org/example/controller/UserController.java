@@ -25,20 +25,17 @@ public class UserController {
     public String showUpdateUserPage(@RequestParam("customerId") Long id, Model model) {
         UserDto userDto = new UserDto(userService.getUserById(id));
         model.addAttribute("userDto", userDto);
+        model.addAttribute("roles", Role.values());
         return "updateUser";
     }
 
-    @PostMapping("/update")
+    @RequestMapping("/update")
     public String updateUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
-        System.out.println(""+ userDto.getId()+userDto.getRole()+"");
 //        model.addAttribute("username", user.getUserName());
         model.addAttribute("userDto", userDto);
-        model.addAttribute("roles", Role.values());
 
-        System.out.println(""+ userDto.getId()+userDto.getRole()+"");
 
-        User user = new User(userDto);
-        System.out.println("user"+ user.getId()+user.getRoles()+"");
+
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("userDto", userDto);
@@ -64,7 +61,7 @@ public class UserController {
     @RequestMapping("/delete")
     public String deleteUser(@RequestParam("customerId") Long id){
         userService.deleteUser(id);
-        return "listCustomers";
+        return "redirect:/user/list";
     }
 
     @GetMapping("/list")

@@ -73,6 +73,8 @@
 
             <form:hidden path="id" />
 
+<%--            <c:param name="customerId" value="${userDto.id}"/>--%>
+
             <label for="Username">
                 <span class="tfsu">Firstname</span> <br>
                 <form:input type="text" path="firstName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>

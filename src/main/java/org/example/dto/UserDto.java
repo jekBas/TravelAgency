@@ -12,6 +12,7 @@ import org.example.model.Role;
 import org.example.model.User;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
