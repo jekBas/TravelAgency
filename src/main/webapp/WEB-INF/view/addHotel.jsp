@@ -36,10 +36,10 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/user/list">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/list">USERS</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/user/add">ADD HOTEL</a></li>
+                <li><a href="${pageContext.request.contextPath}/hotel/list">HOTELS</a></li>
             </sec:authorize>
             <%--            <sec:authorize access="hasAuthority('MANAGER')">--%>
             <%--                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>--%>
@@ -68,7 +68,7 @@
 
         <div> <h6 style="color: black;"> It'll take just few minutes</h6></div>
         <%--        <form name="signUp" action="/signUp"--%>
-        <form:form action="/add" method="post" modelAttribute="hotelDto"
+        <form:form action="/hotel/add" method="post" modelAttribute="hotelDto"
                    cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto; width: 30%">
 
             <label for="Username">
