@@ -1,37 +1,37 @@
 package org.example.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.example.annotation.ValidName;
-import org.example.dto.HotelDto;
+import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "hotel")
 public class Hotel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Enumerated
-    @NotNull
+    @Column(name = "hotel_name", unique = true)
+    @Size(min = 3, max = 20, message = "Hotel's name should be between 3 to 20 characters")
+    private String hotelName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "country")
     private Country country;
 
-    @NotNull
-    @ValidName
-    private String hotelName;
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER)
+    private List<Room> rooms;
 
     public Hotel() {
     }
 
-    public Hotel(HotelDto hotelDto) {
-        this.country = hotelDto.getCountry();
-        this.hotelName = hotelDto.getHotelName();
+    public Hotel(String hotelName, Country country, List<Room> rooms) {
+        this.hotelName = hotelName;
+        this.country = country;
+        this.rooms = rooms;
     }
 }
