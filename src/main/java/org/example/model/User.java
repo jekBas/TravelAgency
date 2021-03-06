@@ -2,11 +2,8 @@ package org.example.model;
 
 import lombok.Data;
 import org.example.dto.UserDto;
-import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Data
 @Entity
@@ -51,8 +48,9 @@ public class User {
         this.email = userDto.getEmail();
         if(userDto.getRole() == null){
             this.roles = Role.USER;
-        }else this.roles = userDto.getRole();
-
+        }else {
+            this.roles = userDto.getRole();
+        }
     }
 
     public User(String userName, String firstName, String lastName, String email, String password) {
