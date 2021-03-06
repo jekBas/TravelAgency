@@ -12,6 +12,7 @@ import org.example.model.Role;
 import org.example.model.User;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,8 @@ import javax.validation.constraints.NotNull;
 @FieldMatch(first = "confirmPassword", second = "password", message = "The password fields must match")
 public class UserDto {
 
+
+    private Long id;
 
     @ValidName
     private String firstName;
@@ -38,6 +41,7 @@ public class UserDto {
 
     private String confirmPassword;
 
+
     @ValidEmail(message = "invalid email")
 
     private String email;
@@ -53,6 +57,7 @@ public class UserDto {
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.role = user.getRoles();
+        this.id = user.getId();
     }
 
 

@@ -15,10 +15,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/user")
+
 public class HotelController {
 
     @Autowired
@@ -26,14 +29,14 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-    @GetMapping("/addHotel")
+    @GetMapping("/add")
     public String showSignUpPage(Model model) {
         HotelDto hotelDto = new HotelDto();
         model.addAttribute("hotelDto", hotelDto);
         return "addHotel";
     }
 
-    @PostMapping("/addHotel")
+    @PostMapping("/add")
     public String addHotel(@Valid @ModelAttribute HotelDto hotelDto, BindingResult bindingResult, Model model) {
 //        model.addAttribute("username", user.getUserName());
         model.addAttribute("hotelDto", hotelDto);

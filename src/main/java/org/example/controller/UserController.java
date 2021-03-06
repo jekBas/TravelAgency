@@ -8,55 +8,63 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
 
-    @GetMapping("/addUser")
-    public String showAddUserPage(Model model) {
-        UserDto userDto = new UserDto();
-        model.addAttribute("userDto", userDto);
-        return "addUser";
-    }
-
-    @PostMapping("/addUser")
-    public String registrationUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
-//        model.addAttribute("username", user.getUserName());
+    @GetMapping("/update")
+    public String showUpdateUserPage(@RequestParam("customerId") Long id, Model model) {
+        UserDto userDto = new UserDto(userService.getUserById(id));
         model.addAttribute("userDto", userDto);
         model.addAttribute("roles", Role.values());
+        return "updateUser";
+    }
+
+    @RequestMapping("/update")
+    public String updateUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
+//        model.addAttribute("username", user.getUserName());
+        model.addAttribute("userDto", userDto);
+
+
 
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("userDto", userDto);
-            return "addUser";
+            return "updateUser";
         }
 
 
-        if (!userService.checkByEmailAndUsername(userDto.getEmail(), userDto.getUserName()).isEmpty()) {
+
+        if (!userService.checkByIdAndEmailAndUsername(userDto.getId(),userDto.getEmail(), userDto.getUserName()).isEmpty()) {
             bindingResult.rejectValue("userName", "userDto.userName", "An account already exists for this email or username");
             model.addAttribute("userDto", userDto);
 
-            return "addUser";
+            return "updateUser";
 
-        } else userService.saveUser(new User(userDto));
+        } else userService.updateUser(new User(userDto));
 
 
 
         return "signIn";
     }
 
-    @GetMapping("/listCustomers")
+
+    @RequestMapping("/delete")
+    public String deleteUser(@RequestParam("customerId") Long id){
+        userService.deleteUser(id);
+        return "redirect:/user/list";
+    }
+
+    @GetMapping("/list")
     public String showCustomers(Model model){
         List<User> customers = userService.getAllUsers();
         model.addAttribute("customers",customers);

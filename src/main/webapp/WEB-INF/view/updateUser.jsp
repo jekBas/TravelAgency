@@ -36,14 +36,14 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/listCustomers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/list">Customers</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addHotel">ADD HOTEL</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/add">ADD HOTEL</a></li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
-            </sec:authorize>
+            <%--            <sec:authorize access="hasAuthority('MANAGER')">--%>
+            <%--                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>--%>
+            <%--            </sec:authorize>--%>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
@@ -68,8 +68,12 @@
 
         <div> <h6 style="color: black;"> It'll take just few minutes</h6></div>
         <%--        <form name="signUp" action="/signUp"--%>
-        <form:form action="/addUser" method="post" modelAttribute="userDto"
+        <form:form action="/user/update" method="post" modelAttribute="userDto"
                    cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto; width: 30%">
+
+            <form:hidden path="id" />
+
+<%--            <c:param name="customerId" value="${userDto.id}"/>--%>
 
             <label for="Username">
                 <span class="tfsu">Firstname</span> <br>
@@ -96,8 +100,6 @@
                 <form:input type="text" path="userName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
                 <br>
                 <form:errors path="userName" cssStyle="color: darkred"/>
-
-                    <%--                <input type="text" placeholder="Username"  name="username"  style="border-radius: 5px;height: 38px;">--%>
             </label>
 
             <br>

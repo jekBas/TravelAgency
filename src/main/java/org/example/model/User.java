@@ -41,6 +41,7 @@ public class User {
     }
 
     public User(UserDto userDto){
+        this.id = userDto.getId();
         this.firstName = userDto.getFirstName();
         this.lastName = userDto.getLastName();
         this.userName = userDto.getUserName();

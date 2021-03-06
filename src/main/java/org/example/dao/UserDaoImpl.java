@@ -35,6 +35,21 @@ public class UserDaoImpl implements UserDao{
         }
     }
 
+//    @Override
+//    @Transactional
+//    public void updateUser(User user) {
+//        Transaction transaction = null;
+//        try (Session session = sessionFactory.openSession()){
+//            transaction = session.beginTransaction();
+//
+//            session.saveOrUpdate(user);
+//            transaction.commit();
+//        } catch (Exception e) {
+//            if (transaction != null)
+//                transaction.rollback();
+//        }
+//    }
+
     @Override
     @Transactional
     public void updateUser(User user) {
@@ -50,13 +65,45 @@ public class UserDaoImpl implements UserDao{
             foundedUser.setEmail(user.getEmail());
             foundedUser.setRoles(user.getRoles());
 
-            session.saveOrUpdate(user);
+            session.saveOrUpdate(foundedUser);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
         }
     }
+
+
+//    @Override
+//    @Transactional
+//    public void updateUser(User user) {
+//        Transaction transaction = null;
+//        try (Session session = sessionFactory.openSession()){
+//            transaction = session.beginTransaction();
+//
+//            session.createQuery("UPDATE User set firstName =:firstname" +
+//                    ",lastName =: lastname," +
+//                    "userName =: username," +
+//                    "password =: password," +
+//                    "email =: email," +
+//                    "roles =:roles where id =: id")
+//                    .setParameter("firstname",user.getFirstName())
+//                    .setParameter("lastname",user.getLastName())
+//                    .setParameter("username",user.getUserName())
+//                    .setParameter("password",user.getPassword())
+//                    .setParameter("email",user.getEmail())
+//                    .setParameter("roles",user.getRoles().name())
+//                    .setParameter("id",user.getId());
+//
+//
+//            transaction.commit();
+//        } catch (Exception e) {
+//            if (transaction != null)
+//                transaction.rollback();
+//        }
+//    }
+
+
 
     @Override
     public User getUserById(Long id) {
@@ -111,6 +158,19 @@ public class UserDaoImpl implements UserDao{
         Query query =session.createQuery("FROM User  where email = :mail or userName = :name")
                 .setParameter("mail",email)
                 .setParameter("name", username);
+        List<User> users = query.getResultList();
+        session.close();
+
+        return users;
+    }
+
+    @Override
+    public List<User> checkByIdAndEmailAndUsername(Long id, String email, String username) {
+        Session session = sessionFactory.openSession();
+        Query query =session.createQuery("FROM User  where email = :mail or userName = :name and id != :id")
+                .setParameter("mail",email)
+                .setParameter("name", username)
+                .setParameter("id",id);
         List<User> users = query.getResultList();
         session.close();
 

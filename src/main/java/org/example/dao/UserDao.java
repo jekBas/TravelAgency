@@ -20,4 +20,6 @@ public interface UserDao {
     User findByUsername(String username);
 
     List<User> checkByEmailAndUsername(String email,String username);
+
+    List<User> checkByIdAndEmailAndUsername(Long id, String email, String userName);
 }

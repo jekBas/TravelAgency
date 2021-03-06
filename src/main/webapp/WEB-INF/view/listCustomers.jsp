@@ -10,6 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<jsp:useBean id="userController" class="org.example.controller.UserController" scope="session"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -35,14 +36,14 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/listCustomers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/list">Customers</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addHotel">ADD HOTEL</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/add">ADD HOTEL</a></li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
-            </sec:authorize>
+            <%--            <sec:authorize access="hasAuthority('MANAGER')">--%>
+            <%--                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>--%>
+            <%--            </sec:authorize>--%>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
@@ -53,7 +54,6 @@
             <sec:authorize access="isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/logout">log out</a></li>
             </sec:authorize>
-
         </ul>
     </div> <!--End of container-->
 </div> <!--End of header-->
@@ -68,9 +68,11 @@
         <table class="table table-dark table-hover">
             <thead>
             <tr>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
+                <th scope="col">first</th>
+                <th scope="col">last</th>
                 <th scope="col">email</th>
+                <th scope="col">update</th>
+                <th scope="col">delete</th>
             </tr>
             </thead>
 
@@ -85,10 +87,24 @@
                 <thead>
                 <c:forEach var="customers" items="${customers}">
 
+                    <c:url var="updateLink" value="${pageContext.request.contextPath}/user/update">
+                        <c:param name="customerId" value="${customers.id}"/>
+                    </c:url>
+
+                    <c:url var="deleteLink" value="${pageContext.request.contextPath}/user/delete">
+                        <c:param name="customerId" value="${customers.id}"/>
+                    </c:url>
+
                     <tr>
-                        <td>${customers.firstName}</td>
-                        <td>${customers.lastName}</td>
-                        <td>${customers.email}</td>
+                        <td><div >${customers.firstName}</div></td>
+                        <td><div >${customers.lastName}</div></td>
+                        <td><div >${customers.email}</div></td>
+                        <td>
+                           <a href="${updateLink}" class="form-control btn"  value="Update" style="background-color: #46790d;color: white;width:100px;height:40px;;margin:auto;" >update</a>
+                        </td>
+                        <td>
+                            <a href="${deleteLink}" class="form-control btn" value="Delete" style="background-color: darkred;color: white;width:100px;height:40px;margin: auto;">delete</a>
+                        </td>
                     </tr>
 
                 </c:forEach>
