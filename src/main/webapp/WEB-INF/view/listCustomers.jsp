@@ -38,7 +38,7 @@
                 <li><a href="${pageContext.request.contextPath}/listCustomers">Customers</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addHotel">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/addHotel">ADD HOTEL</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
                 <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
