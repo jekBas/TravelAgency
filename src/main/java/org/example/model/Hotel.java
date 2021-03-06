@@ -24,7 +24,7 @@ public class Hotel {
     @Column(name = "country")
     private Country country;
 
-    @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Room> rooms;
 
     public Hotel() {

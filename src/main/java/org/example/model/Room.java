@@ -14,8 +14,9 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "room_name", unique = true)
-    private String roomName;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "room_type", nullable = false)
+    private RoomType roomType;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
