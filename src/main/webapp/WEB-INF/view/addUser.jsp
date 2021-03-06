@@ -36,6 +36,12 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
+                <li><a href="${pageContext.request.contextPath}/listCustomers">Customers</a></li>
+            </sec:authorize>
+            <sec:authorize access="hasAuthority('MANAGER')">
+                <li><a href="${pageContext.request.contextPath}/addHotel">Customers</a></li>
+            </sec:authorize>
+            <sec:authorize access="hasAuthority('MANAGER')">
                 <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
             </sec:authorize>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
@@ -57,7 +63,7 @@
     <div class="container">
 
         <div style="padding-top: 55px; ">
-            <h1 style="color: white">Sign up</h1>
+            <h1 style="color: white">Add User</h1>
         </div>
 
         <div> <h6 style="color: black;"> It'll take just few minutes</h6></div>
@@ -134,6 +140,7 @@
                         <form:options items="${roles}"></form:options>
                     </form:select>
                 </label>
+            <br>
 
             <input  class="form-control btn" name="submit" type="submit" value="Confirm" style="background-color: coral;width:80px;margin-bottom: 8px;margin-top: 8px;">
             <br>

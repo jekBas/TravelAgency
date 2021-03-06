@@ -68,6 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/aboutUs", "/signIn").permitAll()
                     .antMatchers("/signUp").not().fullyAuthenticated()
                     .antMatchers("/addUser").hasAuthority("MANAGER")
+                    .antMatchers("/addHotel").hasAuthority("MANAGER")
+                    .antMatchers("/listCustomers").hasAuthority("MANAGER")
 //                    .antMatchers("/signUp").not().fullyAuthenticated()
                     .anyRequest().authenticated()
                 .and()

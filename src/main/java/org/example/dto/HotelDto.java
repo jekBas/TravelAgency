@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class HotelDto {
 
     @Enumerated
-    @NotNull
+    @NotNull(message = "choose country")
     private Country country;
 
     @ValidName
@@ -25,6 +25,7 @@ public class HotelDto {
     }
 
     public HotelDto(Hotel hotel) {
+        this.hotelName = hotel.getHotelName();
         this.country = hotel.getCountry();
 
     }

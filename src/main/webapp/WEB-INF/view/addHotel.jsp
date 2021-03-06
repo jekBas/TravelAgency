@@ -36,7 +36,10 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addHotel">ADD HOTEL</a></li>
+                <li><a href="${pageContext.request.contextPath}/listCustomers">Customers</a></li>
+            </sec:authorize>
+            <sec:authorize access="hasAuthority('MANAGER')">
+                <li><a href="${pageContext.request.contextPath}/addHotel">Customers</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
                 <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
@@ -60,85 +63,37 @@
     <div class="container">
 
         <div style="padding-top: 55px; ">
-            <h1 style="color: white">Sign up</h1>
+            <h1 style="color: white">Adding new hotel</h1>
         </div>
 
         <div> <h6 style="color: black;"> It'll take just few minutes</h6></div>
         <%--        <form name="signUp" action="/signUp"--%>
-        <form:form action="/signUp" method="post" modelAttribute="userDto"
+        <form:form action="/addHotel" method="post" modelAttribute="hotelDto"
                    cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto; width: 30%">
 
             <label for="Username">
-                <span class="tfsu">Firstname</span> <br>
-                <form:input type="text" path="firstName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
+                <span class="tfsu">Country</span> <br>
+                <form:select name="country"  path="country">
+                    <form:option value="${country}">Country</form:option>
+                    <form:options items="${country}"></form:options>
+                </form:select>
+                <br>
+                <form:errors path="country" cssStyle="color: darkred"/>
+            </label>
+
+            <br>
+
+            <label for="Username">
+                <span class="tfsu">Hotel name</span> <br>
+                <form:input type="text" path="hotelName" placeholder="Name" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
                 <br>
                     <%--                <input type="text" placeholder="Firstname" id="Username" name="firstName"  style="border-radius: 5px;height: 38px;">--%>
-                <form:errors path="firstName" cssStyle="color: darkred"/>
+
             </label>
 
             <br>
 
-            <label for="Username">
-                <span class="tfsu">Lastname</span> <br>
-                <form:input type="text" path="lastName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
-                <br>
-                    <%--                <input type="text" placeholder="Lastname"  name="lastName"  style="border-radius: 5px;height: 38px;">--%>
-                <form:errors path="lastName" cssStyle="color: darkred"/>
-            </label>
 
-            <br>
-
-            <label for="Username">
-                <span class="tfsu">Username</span> <br>
-                <form:input type="text" path="userName" placeholder="Username" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
-                <br>
-                <form:errors path="userName" cssStyle="color: darkred"/>
-
-                    <%--                <input type="text" placeholder="Username"  name="username"  style="border-radius: 5px;height: 38px;">--%>
-            </label>
-
-            <br>
-            <label for="Username">
-                <span class="tfsu">Mail</span> <br>
-                <div>
-                    <form:input type="text" path="email" placeholder="Email" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
-                        <%--                    <input type="text" placeholder="example@gmail.com" id="Username1" name="email" style="border-radius: 5px;height: 38px;"; >--%>
-                    <br>
-                    <form:errors path="email" cssStyle="color: darkred"/>
-                </div>
-            </label>
-            <br>
-            <label for="Username">
-                <span class="tfsu">Password</span> <br>
-                <form:input type="password" path="password" placeholder="Password" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
-                <br>
-                <form:errors path="password" cssStyle="color: darkred"/>
-
-                    <%--                <input type="password" placeholder="Password" id="passwordsiup" name="password" style="border-radius: 5px;height: 38px;">--%>
-            </label>
-
-            <br>
-
-            <label for="Username">
-                <span class="tfsu">Confirm pasword</span> <br>
-                <form:input type="password" path="confirmPassword" placeholder="confirm pass" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
-                <br>
-                <form:errors path="confirmPassword" cssStyle="color: #8b0000"/>
-
-                    <%--                <input type="password" placeholder="Password" id="passwordsiup" name="password" style="border-radius: 5px;height: 38px;">--%>
-            </label>
-
-            <br>
-
-            <sec:authorize access="hasRole('MANAGER')">
-                <label for="Role">
-                    <span class="tfsu">New password</span> <br>
-                    <form:select name="roles"  path="role">
-                        <form:option value="${roles}"> --Choose role--</form:option>
-                        <form:options items="${roles}"></form:options>
-                    </form:select>
-                </label>
-            </sec:authorize>
 
             <input  class="form-control btn" name="submit" type="submit" value="Confirm" style="background-color: coral;width:80px;margin-bottom: 8px;margin-top: 8px;">
             <br>
