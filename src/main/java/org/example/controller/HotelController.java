@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
-@Controller
+@Controller("/hotel")
 public class HotelController {
 
     @Autowired
@@ -26,14 +26,14 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-    @GetMapping("/addHotel")
+    @GetMapping("/add")
     public String showSignUpPage(Model model) {
         HotelDto hotelDto = new HotelDto();
         model.addAttribute("hotelDto", hotelDto);
         return "addHotel";
     }
 
-    @PostMapping("/addHotel")
+    @PostMapping("/add")
     public String addHotel(@Valid @ModelAttribute HotelDto hotelDto, BindingResult bindingResult, Model model) {
 //        model.addAttribute("username", user.getUserName());
         model.addAttribute("hotelDto", hotelDto);

@@ -36,14 +36,14 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/listCustomers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/list">Customers</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addHotel">ADD HOTEL</a></li>
+                <li><a href="${pageContext.request.contextPath}/add">ADD HOTEL</a></li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
-            </sec:authorize>
+            <%--            <sec:authorize access="hasAuthority('MANAGER')">--%>
+            <%--                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>--%>
+            <%--            </sec:authorize>--%>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
@@ -70,6 +70,7 @@
         <%--        <form name="signUp" action="/signUp"--%>
         <form:form action="/addUser" method="post" modelAttribute="userDto"
                    cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto; width: 30%">
+            <form:hidden path="id"/>
 
             <label for="Username">
                 <span class="tfsu">Firstname</span> <br>

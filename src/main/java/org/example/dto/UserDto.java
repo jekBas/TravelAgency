@@ -22,6 +22,8 @@ import javax.validation.constraints.NotNull;
 public class UserDto {
 
 
+    private Long id;
+
     @ValidName
     private String firstName;
 
@@ -38,6 +40,7 @@ public class UserDto {
 
     private String confirmPassword;
 
+
     @ValidEmail(message = "invalid email")
 
     private String email;
@@ -53,6 +56,7 @@ public class UserDto {
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.role = user.getRoles();
+        this.id = user.getId();
     }
 
 

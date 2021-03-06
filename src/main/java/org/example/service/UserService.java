@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.User;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface UserService {
@@ -20,4 +21,5 @@ public interface UserService {
 
     List<User> checkByEmailAndUsername(String email,String username);
 
+    List<User> checkByIdAndEmailAndUsername(Long id, String email, String userName);
 }

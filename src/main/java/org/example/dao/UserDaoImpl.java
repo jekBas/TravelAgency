@@ -108,4 +108,16 @@ public class UserDaoImpl implements UserDao{
 
         return users;
     }
+
+    @Override
+    public List<User> checkByIdAndEmailAndUsername(Long id, String email, String username) {
+        Session session = sessionFactory.openSession();
+        Query query =session.createQuery("FROM User  where email = :mail or userName = :name and id != :id")
+                .setParameter("mail",email)
+                .setParameter("name", username);
+        List<User> users = query.getResultList();
+        session.close();
+
+        return users;
+    }
 }

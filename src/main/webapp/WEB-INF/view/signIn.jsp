@@ -35,25 +35,24 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/listCustomers">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/list">Customers</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addHotel">ADD HOTEL</a></li>
+                <li><a href="${pageContext.request.contextPath}/add">ADD HOTEL</a></li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>
-            </sec:authorize>
+            <%--            <sec:authorize access="hasAuthority('MANAGER')">--%>
+            <%--                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>--%>
+            <%--            </sec:authorize>--%>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
-           </sec:authorize>
+            </sec:authorize>
 
             <li><a href="${pageContext.request.contextPath}/aboutUs">About Us</a></li>
 
             <sec:authorize access="isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/logout">log out</a></li>
             </sec:authorize>
-
         </ul>
     </div> <!--End of container-->
 </div> <!--End of header-->
