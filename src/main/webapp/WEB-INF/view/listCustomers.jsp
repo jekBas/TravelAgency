@@ -36,10 +36,10 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/list">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/list">Customers</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/add">ADD HOTEL</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/add">ADD HOTEL</a></li>
             </sec:authorize>
             <%--            <sec:authorize access="hasAuthority('MANAGER')">--%>
             <%--                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>--%>
@@ -87,11 +87,11 @@
                 <thead>
                 <c:forEach var="customers" items="${customers}">
 
-                    <c:url var="updateLink" value="${pageContext.request.contextPath}/update">
+                    <c:url var="updateLink" value="${pageContext.request.contextPath}/user/update">
                         <c:param name="customerId" value="${customers.id}"/>
                     </c:url>
 
-                    <c:url var="deleteLink" value="${pageContext.request.contextPath}/update">
+                    <c:url var="deleteLink" value="${pageContext.request.contextPath}/user/delete">
                         <c:param name="customerId" value="${tempCustomer.id}"/>
                     </c:url>
 

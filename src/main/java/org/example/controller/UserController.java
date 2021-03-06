@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller("/user")
+@Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -28,16 +29,22 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String registrationUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
+    public String updateUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
+        System.out.println(""+ userDto.getId()+userDto.getRole()+"");
 //        model.addAttribute("username", user.getUserName());
         model.addAttribute("userDto", userDto);
         model.addAttribute("roles", Role.values());
 
+        System.out.println(""+ userDto.getId()+userDto.getRole()+"");
+
+        User user = new User(userDto);
+        System.out.println("user"+ user.getId()+user.getRoles()+"");
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("userDto", userDto);
             return "updateUser";
         }
+
 
 
         if (!userService.checkByIdAndEmailAndUsername(userDto.getId(),userDto.getEmail(), userDto.getUserName()).isEmpty()) {
@@ -54,7 +61,7 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public String deleteUser(@RequestParam("customerId") Long id){
         userService.deleteUser(id);
         return "listCustomers";

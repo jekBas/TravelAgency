@@ -35,6 +35,21 @@ public class UserDaoImpl implements UserDao{
         }
     }
 
+//    @Override
+//    @Transactional
+//    public void updateUser(User user) {
+//        Transaction transaction = null;
+//        try (Session session = sessionFactory.openSession()){
+//            transaction = session.beginTransaction();
+//
+//            session.saveOrUpdate(user);
+//            transaction.commit();
+//        } catch (Exception e) {
+//            if (transaction != null)
+//                transaction.rollback();
+//        }
+//    }
+
     @Override
     @Transactional
     public void updateUser(User user) {
@@ -49,6 +64,8 @@ public class UserDaoImpl implements UserDao{
                 transaction.rollback();
         }
     }
+
+
 
     @Override
     public User getUserById(Long id) {
