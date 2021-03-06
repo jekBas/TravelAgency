@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao{
             foundedUser.setEmail(user.getEmail());
             foundedUser.setRoles(user.getRoles());
 
-            session.saveOrUpdate(user);
+            session.saveOrUpdate(foundedUser);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null)

@@ -61,7 +61,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/delete")
+    @RequestMapping("/delete")
     public String deleteUser(@RequestParam("customerId") Long id){
         userService.deleteUser(id);
         return "listCustomers";

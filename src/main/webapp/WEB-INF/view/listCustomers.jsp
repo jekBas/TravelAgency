@@ -92,7 +92,7 @@
                     </c:url>
 
                     <c:url var="deleteLink" value="${pageContext.request.contextPath}/user/delete">
-                        <c:param name="customerId" value="${tempCustomer.id}"/>
+                        <c:param name="customerId" value="${customers.id}"/>
                     </c:url>
 
                     <tr>
