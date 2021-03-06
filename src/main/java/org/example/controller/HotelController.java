@@ -12,25 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/hotel")
 
 public class HotelController {
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private HotelService hotelService;
 
     @GetMapping("/add")
-    public String showSignUpPage(Model model) {
+    public String showAddHotelForm(Model model) {
         HotelDto hotelDto = new HotelDto();
         model.addAttribute("hotelDto", hotelDto);
         return "addHotel";
@@ -59,6 +55,31 @@ public class HotelController {
 
         return "signIn";
     }
+
+    @GetMapping("/list")
+    public String showHotels(Model model) {
+        List<Hotel> hotels = hotelService.getAllHotels();
+        model.addAttribute("hotels",hotels);
+        model.addAttribute("country",Country.values());
+        return "listHotels";
+    }
+
+    @RequestMapping("/delete")
+    public String deleteHotel(@RequestParam("hotelId") Long id){
+
+        hotelService.deleteHotel(id);
+
+        return "redirect:/hotel/list";
+    }
+
+    @GetMapping("/filteredList")
+    public String showHotelsByCountry(@RequestParam String country, Model model) {
+        List<Hotel> hotels = hotelService.getAllHotelsInTheCountry(country);
+        model.addAttribute("hotels",hotels);
+        model.addAttribute("country",Country.values());
+        return "listHotels";
+    }
+
 }
 
 

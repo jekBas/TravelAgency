@@ -35,14 +35,11 @@
         <h1 class="chy">EasyBooking</h1>
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/user/list">Customers</a></li>
+                <li><a href="${pageContext.request.contextPath}/user/list">USERS</a></li>
             </sec:authorize>
             <sec:authorize access="hasAuthority('MANAGER')">
-                <li><a href="${pageContext.request.contextPath}/user/add">ADD HOTEL</a></li>
+                <li><a href="${pageContext.request.contextPath}/hotel/list">HOTELS</a></li>
             </sec:authorize>
-            <%--            <sec:authorize access="hasAuthority('MANAGER')">--%>
-            <%--                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>--%>
-            <%--            </sec:authorize>--%>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>

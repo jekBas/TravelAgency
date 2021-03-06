@@ -35,21 +35,6 @@ public class UserDaoImpl implements UserDao{
         }
     }
 
-//    @Override
-//    @Transactional
-//    public void updateUser(User user) {
-//        Transaction transaction = null;
-//        try (Session session = sessionFactory.openSession()){
-//            transaction = session.beginTransaction();
-//
-//            session.saveOrUpdate(user);
-//            transaction.commit();
-//        } catch (Exception e) {
-//            if (transaction != null)
-//                transaction.rollback();
-//        }
-//    }
-
     @Override
     @Transactional
     public void updateUser(User user) {
@@ -72,36 +57,6 @@ public class UserDaoImpl implements UserDao{
                 transaction.rollback();
         }
     }
-
-
-//    @Override
-//    @Transactional
-//    public void updateUser(User user) {
-//        Transaction transaction = null;
-//        try (Session session = sessionFactory.openSession()){
-//            transaction = session.beginTransaction();
-//
-//            session.createQuery("UPDATE User set firstName =:firstname" +
-//                    ",lastName =: lastname," +
-//                    "userName =: username," +
-//                    "password =: password," +
-//                    "email =: email," +
-//                    "roles =:roles where id =: id")
-//                    .setParameter("firstname",user.getFirstName())
-//                    .setParameter("lastname",user.getLastName())
-//                    .setParameter("username",user.getUserName())
-//                    .setParameter("password",user.getPassword())
-//                    .setParameter("email",user.getEmail())
-//                    .setParameter("roles",user.getRoles().name())
-//                    .setParameter("id",user.getId());
-//
-//
-//            transaction.commit();
-//        } catch (Exception e) {
-//            if (transaction != null)
-//                transaction.rollback();
-//        }
-//    }
 
 
 

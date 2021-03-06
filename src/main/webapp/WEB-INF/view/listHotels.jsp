@@ -2,15 +2,17 @@
   Created by IntelliJ IDEA.
   User: Woland
   Date: 06.03.2021
-  Time: 12:33
+  Time: 21:21
   To change this template use File | Settings | File Templates.
 --%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<jsp:useBean id="userController" class="org.example.controller.UserController" scope="session"/>
+<jsp:useBean id="hotelController" class="org.example.controller.UserController" scope="session"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -62,16 +64,25 @@
      style="background-image: url(https://images.creativemarket.com/0.1.0/ps/1422659/4122/2696/m1/fpnw/wm1/world-map-orange-.jpg?1467641527&s=235e067fec06b0fbd69c747d3d7236ac);">
     <div class="container">
         <h1>Customers</h1>
+        <span class="tfsu">Country</span> <br>
+            <form:select name="country"  path="country">
+                <form:option value="${country}">Country</form:option>
+                <form:options items="${country}"></form:options>
+            </form:select>
 
+            <br>
+            <form:errors path="country" cssStyle="color: darkred"/>
+
+        <a href="/hotel/filteredList" class="form-control btn"  style="background-color: #46790d;color: white;height:35px;width:100px;margin:auto">
+            <div style="margin-top:5%">filter</div>
+        </a>
 
 
         <table class="table table-dark table-hover">
             <thead>
             <tr>
-                <th scope="col">first</th>
-                <th scope="col">last</th>
-                <th scope="col">email</th>
-                <th scope="col">update</th>
+                <th scope="col">country</th>
+                <th scope="col">name</th>
                 <th scope="col">delete</th>
             </tr>
             </thead>
@@ -85,23 +96,15 @@
 
             <table class="table table-dark table-hover">
                 <thead>
-                <c:forEach var="customers" items="${customers}">
+                <c:forEach var="hotels" items="${hotels}">
 
-                    <c:url var="updateLink" value="${pageContext.request.contextPath}/user/update">
-                        <c:param name="customerId" value="${customers.id}"/>
-                    </c:url>
-
-                    <c:url var="deleteLink" value="${pageContext.request.contextPath}/user/delete">
-                        <c:param name="customerId" value="${customers.id}"/>
+                    <c:url var="deleteLink" value="${pageContext.request.contextPath}/hotel/delete">
+                        <c:param name="hotelId" value="${hotels.id}"/>
                     </c:url>
 
                     <tr>
-                        <td><div >${customers.firstName}</div></td>
-                        <td><div >${customers.lastName}</div></td>
-                        <td><div >${customers.email}</div></td>
-                        <td>
-                           <a href="${updateLink}" class="form-control btn"  value="Update" style="background-color: #46790d;color: white;width:100px;height:40px;;margin:auto;" >update</a>
-                        </td>
+                        <td><div >${hotels.hotelName}</div></td>
+                        <td><div >${hotels.country}</div></td>
                         <td>
                             <a href="${deleteLink}" class="form-control btn" value="Delete" style="background-color: darkred;color: white;width:100px;height:40px;margin: auto;">delete</a>
                         </td>
@@ -110,13 +113,17 @@
                 </c:forEach>
                 </thead>
 
-                </thead>
-
             </table>
+
+
 
         </div>
 
-    </div>
+        <a href="/hotel/add" class="form-control btn"  style="background-color: #46790d;color: white;height:70px;width:200px;margin:auto">
+            <div style="margin-top:8%">ADD HOTEL</div>
+        </a>
+
+    </a>
 
 
 </div> <!--End of container-->
