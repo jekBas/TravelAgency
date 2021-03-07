@@ -34,10 +34,10 @@ public class HotelController {
     }
 
     @PostMapping("/add")
-    public String addHotel(@Valid @ModelAttribute HotelDto hotelDto, BindingResult bindingResult, Model model) {
+    public String addHotel(@Valid @ModelAttribute("hotelDto") HotelDto hotelDto, BindingResult bindingResult, Model model) {
 //        model.addAttribute("username", user.getUserName());
-        model.addAttribute("hotelDto", hotelDto);
-        model.addAttribute("roles", Country.values());
+//        model.addAttribute("hotelDto", hotelDto);
+//        model.addAttribute("roles", Country.values());
 
 
         if (bindingResult.hasErrors()) {
@@ -46,7 +46,7 @@ public class HotelController {
         }
 
 
-        if (!hotelService.getAllHotelsInTheCountry(hotelDto.getCountry().name()).isEmpty()) {
+        if (hotelService.chekIfExistHotelByName(new Hotel(hotelDto))) {
             bindingResult.rejectValue("country", "country.hotelName", "Hotel with the same name already exists in this country");
             model.addAttribute("hotelDto", hotelDto);
 

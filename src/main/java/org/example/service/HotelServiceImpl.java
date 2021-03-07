@@ -36,4 +36,9 @@ public class HotelServiceImpl implements HotelService {
     public void deleteHotel(Long id) {
         hotelDao.deleteHotel(id);
     }
+
+    @Override
+    public boolean chekIfExistHotelByName(Hotel hotel) {
+        return hotelDao.chekIfExistHotelByName(hotel);
+    }
 }

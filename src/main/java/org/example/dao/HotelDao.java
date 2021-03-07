@@ -13,4 +13,6 @@ public interface HotelDao {
     List<Hotel> getAllHotels();
 
     void deleteHotel(Long id);
+
+    boolean chekIfExistHotelByName(Hotel hotel);
 }
