@@ -63,19 +63,36 @@
 <div id="banner"
      style="background-image: url(https://images.creativemarket.com/0.1.0/ps/1422659/4122/2696/m1/fpnw/wm1/world-map-orange-.jpg?1467641527&s=235e067fec06b0fbd69c747d3d7236ac);">
     <div class="container">
-        <h1>Customers</h1>
+        <h1>Hotels</h1>
+
+        <br>
+
+
+
+
+
         <span class="tfsu">Country</span> <br>
-            <form:select name="country"  path="country">
-                <form:option value="${country}">Country</form:option>
-                <form:options items="${country}"></form:options>
-            </form:select>
 
-            <br>
-            <form:errors path="country" cssStyle="color: darkred"/>
 
-        <a href="/hotel/filteredList" class="form-control btn"  style="background-color: #46790d;color: white;height:35px;width:100px;margin:auto">
-            <div style="margin-top:5%">filter</div>
-        </a>
+            <form:form action="/hotel/filteredList" modelAttribute="filter" method="post">
+
+                <a href="${pageContext.request.contextPath}/hotel/list" class="form-control btn"  style="background-color: #46790d;color: white;height:35px;width:100px;margin:auto">
+                    <div style="margin: auto">clean filter</div>
+                </a>
+
+                <form:select name="country"  path="country" >
+                    <form:options  items="${country}"></form:options>
+
+                </form:select>
+
+
+                <form:errors path="country" cssStyle="color: darkred"/>
+
+
+
+                <input  class="form-control btn" name="submit" type="submit" value="filter" style="background-color: #46790d;color: white;height:35px;width:100px;margin:auto">
+            </form:form>
+
 
 
         <table class="table table-dark table-hover">

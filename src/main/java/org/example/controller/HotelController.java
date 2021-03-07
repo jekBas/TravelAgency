@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.dto.HotelDto;
+import org.example.dto.HotelFilter;
 import org.example.dto.UserDto;
 import org.example.model.Country;
 import org.example.model.Hotel;
@@ -61,6 +62,9 @@ public class HotelController {
         List<Hotel> hotels = hotelService.getAllHotels();
         model.addAttribute("hotels",hotels);
         model.addAttribute("country",Country.values());
+
+        HotelFilter filter = new HotelFilter();
+        model.addAttribute("filter",filter);
         return "listHotels";
     }
 
@@ -72,12 +76,18 @@ public class HotelController {
         return "redirect:/hotel/list";
     }
 
-    @GetMapping("/filteredList")
-    public String showHotelsByCountry(@RequestParam String country, Model model) {
-        List<Hotel> hotels = hotelService.getAllHotelsInTheCountry(country);
-        model.addAttribute("hotels",hotels);
-        model.addAttribute("country",Country.values());
-        return "listHotels";
+    @RequestMapping("/filteredList")
+    public String showHotelsByCountry(@ModelAttribute("filter") HotelFilter filter, Model model) {
+
+        if(filter.getCountry().name().isEmpty()){
+            return "redirect:/hotel/list";
+        }else{
+            List<Hotel> hotels = hotelService.getAllHotelsInTheCountry(filter.getCountry().name());
+            model.addAttribute("hotels",hotels);
+            model.addAttribute("country",Country.values());
+            return "listHotels";
+        }
+
     }
 
 }
