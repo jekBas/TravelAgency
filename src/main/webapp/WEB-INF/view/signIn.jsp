@@ -32,7 +32,16 @@
 
 <div id="header" style="margin-left: 10%;margin-right: 10%;">
     <div class="container">
-        <h1 class="chy">EasyBooking</h1>
+        <sec:authorize access="isAuthenticated()">
+            <h1 class="chy">
+                <img style="height: 32px;width: 32px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL4gjlRnYx_Syp-ktNGolRWqP0LXuVL4ddjg&usqp=CAU">
+                    ${pageContext["request"].userPrincipal.principal.username}</h1>
+        </sec:authorize>
+
+        <sec:authorize access="!isAuthenticated()">
+            <h1 class="chy">EasyBooking</h1>
+        </sec:authorize>
+
         <ul class="navbar">
             <sec:authorize access="hasAuthority('MANAGER')">
                 <li><a href="${pageContext.request.contextPath}/user/list">USERS</a></li>
@@ -64,38 +73,39 @@
         </c:if>
 
         <sec:authorize access="!isAuthenticated()">
-<%--        <c:if test="${!(pageContext.request.isUserInRole('USER') || pageContext.request.isUserInRole('ADMIN'))}">--%>
-        <form name="signIn" action="/signIn" method="post"
-              style="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto">
+            <%--        <c:if test="${!(pageContext.request.isUserInRole('USER') || pageContext.request.isUserInRole('ADMIN'))}">--%>
+            <form name="signIn" action="/signIn" method="post"
+                  style="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto">
 
 
-            <br>
-            <label for="Username">
-                Username:
-                <div>
-                    <input type="text" placeholder="Username" id="Username" name="username" value=''
-                           style="border-radius: 5px;height: 38px;">
-                </div>
-            </label>
-            <br>
-            <label for="Password">
-                Password:
-                <div>
-                    <input type="password" placeholder="Password" id="Password" name="password"
-                           style="border-radius: 5px;height: 38px;">
-                </div>
-            </label>
+                <br>
+                <label for="Username">
+                    Username:
+                    <div>
+                        <input type="text" placeholder="Username" id="Username" name="username" value=''
+                               style="border-radius: 5px;height: 38px;">
+                    </div>
+                </label>
+                <br>
+                <label for="Password">
+                    Password:
+                    <div>
+                        <input type="password" placeholder="Password" id="Password" name="password"
+                               style="border-radius: 5px;height: 38px;">
+                    </div>
+                </label>
 
-            <br>
-            <br>
-            <input name="submit" type="submit" value="Log in"
-                   class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <br>
+                <br>
+                <input name="submit" type="submit" value="Log in"
+                       class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <%--            <button  class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">Log in</button>--%>
-        </form>
-<%--        </c:if>--%>
-            </sec:authorize>
+                    <%--            <button  class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">Log in</button>--%>
+            </form>
+            <%--        </c:if>--%>
+        </sec:authorize>
+
 
     </div> <!--End of container-->
 </div> <!--End of banner-->

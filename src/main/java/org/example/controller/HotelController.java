@@ -39,7 +39,6 @@ public class HotelController {
 //        model.addAttribute("hotelDto", hotelDto);
 //        model.addAttribute("roles", Country.values());
 
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("hotelDto", hotelDto);
             return "addHotel";
