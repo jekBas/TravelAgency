@@ -46,7 +46,7 @@ public class HotelController {
 
 
         if (hotelService.chekIfExistHotelByName(new Hotel(hotelDto))) {
-            bindingResult.rejectValue("country", "country.hotelName", "Hotel with the same name already exists in this country");
+            bindingResult.rejectValue("country", "country.hotelName", "Hotel with the same name already exists");
             model.addAttribute("hotelDto", hotelDto);
 
             return "addHotel";
