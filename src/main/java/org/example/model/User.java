@@ -40,6 +40,7 @@ public class User {
     public User() {
     }
 
+
     public User(UserDto userDto){
         this.id = userDto.getId();
         this.firstName = userDto.getFirstName();
