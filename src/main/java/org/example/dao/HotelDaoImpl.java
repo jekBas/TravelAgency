@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.model.Hotel;
+import org.example.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -84,5 +85,14 @@ public class HotelDaoImpl implements HotelDao {
         if (!dbHotels.isEmpty()) {
             return true;
         } else return false;
+    }
+
+    @Override
+    public Hotel getHotelById(Long id) {
+        Session session = sessionFactory.openSession();
+        Hotel hotel = session.get(Hotel.class, id);
+        session.close();
+
+        return hotel;
     }
 }

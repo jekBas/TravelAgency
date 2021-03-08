@@ -20,7 +20,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/hotel")
-
 public class HotelController {
 
     @Autowired
@@ -35,9 +34,6 @@ public class HotelController {
 
     @PostMapping("/add")
     public String addHotel(@Valid @ModelAttribute("hotelDto") HotelDto hotelDto, BindingResult bindingResult, Model model) {
-//        model.addAttribute("username", user.getUserName());
-//        model.addAttribute("hotelDto", hotelDto);
-//        model.addAttribute("roles", Country.values());
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("hotelDto", hotelDto);

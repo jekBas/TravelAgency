@@ -1,6 +1,7 @@
 package org.example.model;
 
 import lombok.Data;
+import org.example.dto.RoomDto;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,4 +25,14 @@ public class Room {
 
 //    @OneToMany(mappedBy = "rooms")
 //    private List<Order> orders;
+
+
+    public Room() {
+    }
+
+    public Room(RoomDto roomDto) {
+        this.id = roomDto.getId();
+        this.roomType = roomDto.getRoomType();
+        this.hotel = roomDto.getHotel();
+    }
 }

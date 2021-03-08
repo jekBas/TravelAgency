@@ -41,4 +41,9 @@ public class HotelServiceImpl implements HotelService {
     public boolean chekIfExistHotelByName(Hotel hotel) {
         return hotelDao.chekIfExistHotelByName(hotel);
     }
+
+    @Override
+    public Hotel getHotelById(Long id) {
+        return hotelDao.getHotelById(id);
+    }
 }

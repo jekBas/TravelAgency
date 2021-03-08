@@ -115,6 +115,10 @@
                 <thead>
                 <c:forEach var="hotels" items="${hotels}">
 
+                    <c:url var="addRoom" value="${pageContext.request.contextPath}/room/add">
+                        <c:param name="hotelId" value="${hotels.id}"/>
+                    </c:url>
+
                     <c:url var="deleteLink" value="${pageContext.request.contextPath}/hotel/delete">
                         <c:param name="hotelId" value="${hotels.id}"/>
                     </c:url>
@@ -122,6 +126,10 @@
                     <tr>
                         <td><div >${hotels.hotelName}</div></td>
                         <td><div >${hotels.country}</div></td>
+                        <td>
+                            <a href="${addRoom}" class="form-control btn" value="" style="background-color: #46790d;color: white;width:100px;height:40px;margin: auto;">add room</a>
+                        </td>
+
                         <td>
                             <a href="${deleteLink}" class="form-control btn" value="Delete" style="background-color: darkred;color: white;width:100px;height:40px;margin: auto;">delete</a>
                         </td>

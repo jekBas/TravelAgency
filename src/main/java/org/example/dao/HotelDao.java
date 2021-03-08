@@ -15,4 +15,6 @@ public interface HotelDao {
     void deleteHotel(Long id);
 
     boolean chekIfExistHotelByName(Hotel hotel);
+
+    Hotel getHotelById(Long id);
 }

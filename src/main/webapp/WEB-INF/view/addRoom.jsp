@@ -1,16 +1,18 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Woland
+  Date: 08.03.2021
+  Time: 16:42
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Woland
-  Date: 05.03.2021
-  Time: 18:39
-  To change this template use File | Settings | File Templates.
---%>
+
+
 <html>
 <head>
     <title>Add hotel</title>
@@ -41,9 +43,6 @@
             <sec:authorize access="hasAuthority('MANAGER')">
                 <li><a href="${pageContext.request.contextPath}/hotel/list">HOTELS</a></li>
             </sec:authorize>
-            <%--            <sec:authorize access="hasAuthority('MANAGER')">--%>
-            <%--                <li><a href="${pageContext.request.contextPath}/addUser">ADD USER</a></li>--%>
-            <%--            </sec:authorize>--%>
             <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
@@ -63,37 +62,24 @@
     <div class="container">
 
         <div style="padding-top: 55px; ">
-            <h1 style="color: white">Adding new hotel</h1>
+            <h1 style="color: white">Adding new room</h1>
         </div>
 
         <div> <h6 style="color: black;"> It'll take just few minutes</h6></div>
         <%--        <form name="signUp" action="/signUp"--%>
-        <form:form action="/hotel/add" method="post" modelAttribute="hotelDto"
+        <form:form action="/room/add" method="post" modelAttribute="roomDto"
                    cssStyle="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto; width: 30%">
 
-            <label for="Username">
-                <span class="tfsu">Country</span> <br>
-                <form:select name="country"  path="country">
-                    <form:option value="${country}">Country</form:option>
-                    <form:options items="${country}"></form:options>
+            <label>
+                <span class="tfsu">Room type</span> <br>
+                <form:select name="type"  path="roomType">
+                    <form:options items="${roomType}"></form:options>
                 </form:select>
                 <br>
-                <form:errors path="country" cssStyle="color: darkred"/>
+                <form:errors path="roomType" cssStyle="color: darkred"/>
             </label>
 
             <br>
-
-            <label for="Username">
-                <span class="tfsu">Hotel name</span> <br>
-                <form:input type="text" path="hotelName" placeholder="Name" id="Username" cssStyle="border-radius: 5px;height: 38px;"></form:input>
-                <br>
-                <form:errors path="hotelName" cssStyle="color: darkred"/>
-                    <%--                <input type="text" placeholder="Firstname" id="Username" name="firstName"  style="border-radius: 5px;height: 38px;">--%>
-
-            </label>
-
-            <br>
-
 
 
             <input  class="form-control btn" name="submit" type="submit" value="Confirm" style="background-color: coral;width:80px;margin-bottom: 8px;margin-top: 8px;">
