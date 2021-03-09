@@ -41,7 +41,13 @@
             <sec:authorize access="hasAuthority('MANAGER')">
                 <li><a href="${pageContext.request.contextPath}/hotel/list">HOTELS</a></li>
             </sec:authorize>
-            <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+            <sec:authorize access="!isAuthenticated()">
+                <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <li><a href="${pageContext.request.contextPath}/order/all">Home</a></li>
+            </sec:authorize>
+
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="${pageContext.request.contextPath}/signUp">Sign up</a></li>
             </sec:authorize>

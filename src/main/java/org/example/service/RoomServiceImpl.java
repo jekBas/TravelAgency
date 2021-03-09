@@ -5,6 +5,8 @@ import org.example.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RoomServiceImpl implements RoomService {
 
@@ -23,5 +25,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void deleteRoom(Room room) {
         roomDao.deleteRoom(room.getId());
+    }
+
+    @Override
+    public List<Room> getAllRoomByHotelId(Long id) {
+        return roomDao.getAllRoomByHotelId(id);
     }
 }

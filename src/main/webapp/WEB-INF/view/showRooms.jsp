@@ -34,7 +34,8 @@
     <div class="container">
         <sec:authorize access="isAuthenticated()">
             <h1 class="chy">
-                <img style="height: 32px;width: 32px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL4gjlRnYx_Syp-ktNGolRWqP0LXuVL4ddjg&usqp=CAU">
+                <img style="height: 32px;width: 32px;"
+                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL4gjlRnYx_Syp-ktNGolRWqP0LXuVL4ddjg&usqp=CAU">
                     ${pageContext["request"].userPrincipal.principal.username}</h1>
         </sec:authorize>
 
@@ -72,52 +73,86 @@
 <div id="banner"
      style="background-image: url(https://images.creativemarket.com/0.1.0/ps/1422659/4122/2696/m1/fpnw/wm1/world-map-orange-.jpg?1467641527&s=235e067fec06b0fbd69c747d3d7236ac);">
     <div class="container">
-        <h1>FIND YOUR HOTEL</h1>
-
-        <c:if test="${not empty errorMessage}">
-            <div style="color:red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
-        </c:if>
+        <h3>FIND YOUR HOTEL</h3>
 
 
-            <form name="signIn" action="/signIn" method="post"
-                  style="width: 30%; background-color: #4e555b;opacity: 0.85;border-radius: 7px;margin:auto">
+        <span class="tfsu">Country</span> <br>
 
 
-                <br>
-                <label for="Username">
-                    Username:
-                    <div>
-                        <input type="text" placeholder="Username" id="Username" name="username" value=''
-                               style="border-radius: 5px;height: 38px;">
-                    </div>
-                </label>
-                <br>
-                <label for="Password">
-                    Password:
-                    <div>
-                        <input type="password" placeholder="Password" id="Password" name="password"
-                               style="border-radius: 5px;height: 38px;">
-                    </div>
-                </label>
+        <%--        Attention method GET below--%>
+        <form:form action="/order/inCountry" modelAttribute="filter" method="post">
 
-                <br>
-                <br>
-                <input name="submit" type="submit" value="Log in"
-                       class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <a href="${pageContext.request.contextPath}/hotel/list" class="form-control btn"
+               style="background-color: #46790d;color: white;height:35px;width:100px;margin:auto">
+                <div style="margin: auto">clean filter</div>
+            </a>
 
-                    <%--            <button  class="form-control btn" style="background-color: coral;width:80px;margin-bottom: 8px;">Log in</button>--%>
-            </form>
-            <%--        </c:if>--%>
+            <form:select name="country" path="country">
+                <form:options items="${country}"></form:options>
+
+            </form:select>
 
 
+            <form:errors path="country" cssStyle="color: darkred"/>
 
 
+            <input class="form-control btn" name="submit" type="submit" value="filter"
+                   style="background-color: #46790d;color: white;height:35px;width:100px;margin:auto">
+        </form:form>
 
-        </div> <!--End of container-->
+        <br>
+        <br>
+        <br>
+
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th scope="col">country</th>
+                <th scope="col">name</th>
+                <th scope="col">delete</th>
+            </tr>
+            </thead>
+
+        </table>
+        <div class="table table-dark table-striped"
+             style="position: relative;
+                      height: 200px;
+                       overflow: auto;
+                         display: block; color: #4e555b;opacity: 0.85; margin: auto">
+
+            <table class="table table-dark table-hover">
+                <thead>
+                <c:forEach var="hotels" items="${hotels}">
+
+                    <c:url var="showRoom" value="${pageContext.request.contextPath}/order/showRooms">
+                        <c:param name="hotelId" value="${hotels.id}"/>
+                    </c:url>
+
+                    <tr>
+                        <td>
+                            <div>${hotels.hotelName}</div>
+                        </td>
+                        <td>
+                            <div>${hotels.country}</div>
+                        </td>
+                        <td style="padding-left: 10%">
+                            <a href="${showRoom}" class="form-control btn" value="q"
+                               style="background-color: #46790d;color: white;width:150px;height:40px;margin: auto;">choose room</a>
+                        </td>
+
+                    </tr>
+
+                </c:forEach>
+                </thead>
+
+            </table>
+
+
+        </div>
+
+
+    </div> <!--End of container-->
 </div> <!--End of banner-->
-
-
 
 
 </body>

@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.model.Hotel;
 import org.example.model.Room;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,6 +8,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 public class RoomDaoImpl implements RoomDao {
@@ -47,5 +51,13 @@ public class RoomDaoImpl implements RoomDao {
             if (transaction != null)
                 transaction.rollback();
         }
+    }
+
+    @Override
+    public List<Room> getAllRoomByHotelId(Long id) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Room where hotel.id =:id")
+                .setParameter("id", id);
+        return query.getResultList();
     }
 }

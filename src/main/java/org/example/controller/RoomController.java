@@ -44,4 +44,5 @@ public class RoomController {
 
         return "redirect:/hotel/list";
     }
+
 }
