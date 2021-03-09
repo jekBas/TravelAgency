@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.example.dto.HotelFilter;
-import org.example.dto.OrderDto;
+import org.example.dto.OrderParameters;
 import org.example.model.Country;
 import org.example.model.Hotel;
 import org.example.model.Room;
@@ -16,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/order")
+@SessionAttributes("hotelId")
 public class OrderController {
     @Autowired
     private  HotelService hotelService;
@@ -41,17 +42,21 @@ public class OrderController {
 
     @GetMapping("/orderForm")
     public String createOrder(@RequestParam("hotelId") Long id, Model model){
-        OrderDto orderDto = new OrderDto();
-     model.addAttribute("orderDto",orderDto);
+        OrderParameters orderParameters = new OrderParameters();
+        orderParameters.setHotelId(id);
+     model.addAttribute("orderParameters",orderParameters);
      return "orderForm";
     }
 
     @GetMapping("/showRooms")
-    public String showRooms(@RequestParam("hotelId") Long id,@ModelAttribute("filter") HotelFilter filter, Model model){
-        List<Hotel> hotels = hotelService.getAllHotelsInTheCountry(filter.getCountry().name());
-     List<Room> rooms = roomService.getAllRoomByHotelId(id);
+    public String showRooms(@ModelAttribute("orderParameters") OrderParameters orderParameters, Model model){
+//     List<Room> rooms = roomService.getAvaibleRooms(orderParameters.getHotelId(), orderParameters.getDateFrom(),orderParameters.getDateTo());
+//     model.addAttribute("rooms",rooms);
+        System.out.println(orderParameters.getHotelId());
+        System.out.println(orderParameters.getDateFrom());
+        System.out.println(orderParameters.getDateTo());
 
-        return "orderPageListHotels";
+        return "listRooms";
     }
 
 
