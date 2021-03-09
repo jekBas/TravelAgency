@@ -3,7 +3,6 @@ package org.example.dto;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.model.Hotel;
-import org.example.model.Room;
 import org.example.model.RoomType;
 
 import javax.persistence.*;
@@ -22,9 +21,9 @@ public class RoomDto {
     public RoomDto() {
     }
 
-    public RoomDto(Room room) {
-        this.id = room.getId();
-        this.roomType = room.getRoomType();
-        this.hotel = room.getHotel();
+    public RoomDto(Long id, RoomType roomType, Hotel hotel) {
+        this.id = id;
+        this.roomType = roomType;
+        this.hotel = hotel;
     }
 }
