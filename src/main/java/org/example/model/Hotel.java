@@ -1,7 +1,6 @@
 package org.example.model;
 
 import lombok.Data;
-import org.example.dto.HotelDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -27,13 +26,7 @@ public class Hotel {
     @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Room> rooms;
 
-    public Hotel() {
-    }
-
-    public Hotel(HotelDto hotelDto) {
-        this.hotelName = hotelDto.getHotelName();
-        this.country = hotelDto.getCountry();
-    }
+    public Hotel() {}
 
     public Hotel(String hotelName, Country country, List<Room> rooms) {
         this.hotelName = hotelName;
