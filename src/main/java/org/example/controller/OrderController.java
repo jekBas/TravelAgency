@@ -50,8 +50,8 @@ public class OrderController {
 
     @GetMapping("/showRooms")
     public String showRooms(@ModelAttribute("orderParameters") OrderParameters orderParameters, Model model){
-//     List<Room> rooms = roomService.getAvaibleRooms(orderParameters.getHotelId(), orderParameters.getDateFrom(),orderParameters.getDateTo());
-//     model.addAttribute("rooms",rooms);
+     List<Room> rooms = roomService.getAvailableRooms(orderParameters.getHotelId(), orderParameters.getDateFrom(),orderParameters.getDateTo());
+     model.addAttribute("rooms",rooms);
         System.out.println(orderParameters.getHotelId());
         System.out.println(orderParameters.getDateFrom());
         System.out.println(orderParameters.getDateTo());

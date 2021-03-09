@@ -13,5 +13,5 @@ public interface RoomService {
 
     List<Room> getAllRoomByHotelId(Long id);
 
-    List<Room> checkAvaibleRooms(Long hotelId, Date dateFrom,Date dateTo);
+    List<Room> getAvailableRooms(Long hotelId, Date dateFrom,Date dateTo);
 }

@@ -35,7 +35,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> checkAvaibleRooms(Long hotelId, Date dateFrom, Date dateTo) {
-        return roomDao.getAvaibleRooms(hotelId,dateFrom,dateTo);
+    public List<Room> getAvailableRooms(Long hotelId, Date dateFrom, Date dateTo) {
+        return roomDao.getAvailableRooms(hotelId,dateFrom,dateTo);
     }
 }

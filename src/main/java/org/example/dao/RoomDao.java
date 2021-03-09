@@ -13,5 +13,5 @@ public interface RoomDao {
 
     List<Room> getAllRoomByHotelId(Long id);
 
-    List<Room> getAvaibleRooms(Long hotelId, Date dateFrom, Date dateTo);
+    List<Room> getAvailableRooms(Long hotelId, Date dateFrom, Date dateTo);
 }
