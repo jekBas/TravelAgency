@@ -13,5 +13,4 @@ public class HotelFilter {
 
     @Enumerated
     private Country country;
-
 }

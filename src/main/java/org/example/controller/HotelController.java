@@ -1,14 +1,11 @@
 package org.example.controller;
 
 import org.example.dto.HotelDto;
+import org.example.dto.HotelDtoTransformer;
 import org.example.dto.HotelFilter;
-import org.example.dto.UserDto;
 import org.example.model.Country;
 import org.example.model.Hotel;
-import org.example.model.Role;
-import org.example.model.User;
 import org.example.service.HotelService;
-import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,14 +37,13 @@ public class HotelController {
             return "addHotel";
         }
 
-
-        if (hotelService.chekIfExistHotelByName(new Hotel(hotelDto))) {
+        if (hotelService.chekIfExistHotelByName(HotelDtoTransformer.convertHotelDtoToHotel(hotelDto))) {
             bindingResult.rejectValue("country", "country.hotelName", "Hotel with the same name already exists");
             model.addAttribute("hotelDto", hotelDto);
-
             return "addHotel";
-
-        } else hotelService.saveHotel(new Hotel(hotelDto));
+        } else {
+            hotelService.saveHotel(HotelDtoTransformer.convertHotelDtoToHotel(hotelDto));
+        }
 
         return "signIn";
     }
@@ -55,36 +51,30 @@ public class HotelController {
     @GetMapping("/list")
     public String showHotels(Model model) {
         List<Hotel> hotels = hotelService.getAllHotels();
-        model.addAttribute("hotels",hotels);
-        model.addAttribute("country",Country.values());
+        model.addAttribute("hotels", hotels);
+        model.addAttribute("country", Country.values());
 
         HotelFilter filter = new HotelFilter();
-        model.addAttribute("filter",filter);
+        model.addAttribute("filter", filter);
         return "listHotels";
     }
 
     @RequestMapping("/delete")
-    public String deleteHotel(@RequestParam("hotelId") Long id){
-
+    public String deleteHotel(@RequestParam("hotelId") Long id) {
         hotelService.deleteHotel(id);
-
         return "redirect:/hotel/list";
     }
 
     @RequestMapping("/filteredList")
     public String showHotelsByCountry(@ModelAttribute("filter") HotelFilter filter, Model model) {
 
-        if(filter.getCountry().name().isEmpty()){
+        if (filter.getCountry().name().isEmpty()) {
             return "redirect:/hotel/list";
-        }else{
+        } else {
             List<Hotel> hotels = hotelService.getAllHotelsInTheCountry(filter.getCountry().name());
-            model.addAttribute("hotels",hotels);
-            model.addAttribute("country",Country.values());
+            model.addAttribute("hotels", hotels);
+            model.addAttribute("country", Country.values());
             return "listHotels";
         }
-
     }
-
 }
-
-

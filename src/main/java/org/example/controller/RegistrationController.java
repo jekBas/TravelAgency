@@ -1,8 +1,8 @@
 package org.example.controller;
 
 import org.example.dto.UserDto;
+import org.example.dto.UserDtoTransformer;
 import org.example.model.Role;
-import org.example.model.User;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,34 +29,22 @@ public class RegistrationController {
 
     @PostMapping("/signUp")
     public String registrationUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
-//        model.addAttribute("username", user.getUserName());
         model.addAttribute("userDto", userDto);
         model.addAttribute("roles",Role.values());
-
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("userDto", userDto);
             return "signUp";
         }
 
-
         if (!userService.checkByEmailAndUsername(userDto.getEmail(), userDto.getUserName()).isEmpty()) {
             bindingResult.rejectValue("userName", "userDto.userName", "An account already exists for this email or username");
             model.addAttribute("userDto", userDto);
-
             return "signUp";
-
-        } else userService.saveUser(new User(userDto));
-
-
-//        if(userService.findByUsername(userDto.getUserName()) != null){
-//            bindingResult.rejectValue("userName", "userDto.userName","An account already exists for this username");
-//            model.addAttribute("userDto", userDto);
-//            return "signUp";
-//
-
+        } else {
+            userService.saveUser(UserDtoTransformer.convertUserDtoToUser(userDto));
+        }
 
         return "signIn";
     }
-
 }
