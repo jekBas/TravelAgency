@@ -1,5 +1,6 @@
-package org.example.dao;
+package org.example.dao.impl;
 
+import org.example.dao.UserDao;
 import org.example.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +13,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -34,7 +35,6 @@ public class UserDaoImpl implements UserDao{
                 transaction.rollback();
         }
     }
-
 
     @Override
     @Transactional
@@ -58,8 +58,6 @@ public class UserDaoImpl implements UserDao{
                 transaction.rollback();
         }
     }
-
-
 
     @Override
     public User getUserById(Long id) {

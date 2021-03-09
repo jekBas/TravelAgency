@@ -1,5 +1,6 @@
-package org.example.dao;
+package org.example.dao.impl;
 
+import org.example.dao.RoomDao;
 import org.example.model.Hotel;
 import org.example.model.Room;
 import org.hibernate.Session;

@@ -1,7 +1,7 @@
-package org.example.dao;
+package org.example.dao.impl;
 
+import org.example.dao.HotelDao;
 import org.example.model.Hotel;
-import org.example.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -34,7 +34,6 @@ public class HotelDaoImpl implements HotelDao {
                 transaction.rollback();
         }
     }
-
 
     @Override
     public List<Hotel> getAllHotelsInTheCountry(String country) {

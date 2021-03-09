@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.example.dto.RoomDto;
-import org.example.dto.RoomDtoTransformer;
+import org.example.dto.transformer.RoomDtoTransformer;
 import org.example.model.Hotel;
 import org.example.model.RoomType;
 import org.example.service.HotelService;
