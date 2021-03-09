@@ -21,4 +21,11 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
+
+    public Room() {}
+
+    public Room(RoomType roomType, Hotel hotel) {
+        this.roomType = roomType;
+        this.hotel = hotel;
+    }
 }
