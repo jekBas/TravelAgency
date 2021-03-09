@@ -77,8 +77,7 @@ public class HotelDaoImpl implements HotelDao {
     public boolean chekIfExistHotelByName(Hotel hotel) {
         Session session = sessionFactory.openSession();
         List<Hotel> dbHotels;
-        Query query = session.createQuery("from Hotel where country = :country and hotelName =:name")
-                .setParameter("country", hotel.getCountry().name())
+        Query query = session.createQuery("from Hotel where hotelName =:name")
                 .setParameter("name", hotel.getHotelName());
         dbHotels = query.getResultList();
 

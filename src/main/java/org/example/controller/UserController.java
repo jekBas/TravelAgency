@@ -54,7 +54,7 @@ public class UserController {
 
 
 
-        return "signIn";
+        return "redirect:/user/list";
     }
 
 
@@ -70,6 +70,6 @@ public class UserController {
         model.addAttribute("customers",customers);
 
 
-        return "listCustomers";
+        return "listUsers";
     }
 }

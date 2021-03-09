@@ -35,6 +35,7 @@ public class UserDaoImpl implements UserDao{
         }
     }
 
+
     @Override
     @Transactional
     public void updateUser(User user) {
@@ -122,7 +123,7 @@ public class UserDaoImpl implements UserDao{
     @Override
     public List<User> checkByIdAndEmailAndUsername(Long id, String email, String username) {
         Session session = sessionFactory.openSession();
-        Query query =session.createQuery("FROM User  where email = :mail or userName = :name and id != :id")
+        Query query =session.createQuery("FROM User  where (email = :mail or userName = :name)  and id <> :id")
                 .setParameter("mail",email)
                 .setParameter("name", username)
                 .setParameter("id",id);

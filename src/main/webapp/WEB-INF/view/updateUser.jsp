@@ -60,7 +60,7 @@
     <div class="container">
 
         <div style="padding-top: 55px; ">
-            <h1 style="color: white">Add User</h1>
+            <h1 style="color: white">Update User</h1>
         </div>
 
         <div> <h6 style="color: black;"> It'll take just few minutes</h6></div>
@@ -131,7 +131,7 @@
             <br>
 
                 <label for="Role">
-                    <span class="tfsu">New password</span> <br>
+                    <span class="tfsu">Role</span> <br>
                     <form:select name="roles"  path="role">
                         <form:option value="${roles}"> --Choose role--</form:option>
                         <form:options items="${roles}"></form:options>
