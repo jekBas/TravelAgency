@@ -6,6 +6,7 @@ import org.example.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,5 +32,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Room> getAllRoomByHotelId(Long id) {
         return roomDao.getAllRoomByHotelId(id);
+    }
+
+    @Override
+    public List<Room> checkAvaibleRooms(Long hotelId, Date dateFrom, Date dateTo) {
+        return roomDao.getAvaibleRooms(hotelId,dateFrom,dateTo);
     }
 }

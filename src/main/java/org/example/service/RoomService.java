@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.Room;
 
+import java.util.Date;
 import java.util.List;
 
 public interface RoomService {
@@ -11,4 +12,6 @@ public interface RoomService {
     void deleteRoom(Room room);
 
     List<Room> getAllRoomByHotelId(Long id);
+
+    List<Room> checkAvaibleRooms(Long hotelId, Date dateFrom,Date dateTo);
 }
