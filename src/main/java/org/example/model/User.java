@@ -1,7 +1,6 @@
 package org.example.model;
 
 import lombok.Data;
-import org.example.dto.UserDto;
 
 import javax.persistence.*;
 
@@ -18,17 +17,14 @@ public class User {
     @Column(name = "username",unique = true)
     private String userName;
 
-
     @Column(name = "first_name")
     private String firstName;
-
 
     @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email", unique = true)
     private String email;
-
 
     @Column(name = "password")
     private String password;
@@ -38,21 +34,6 @@ public class User {
     private Role roles;
 
     public User() {
-    }
-
-
-    public User(UserDto userDto){
-        this.id = userDto.getId();
-        this.firstName = userDto.getFirstName();
-        this.lastName = userDto.getLastName();
-        this.userName = userDto.getUserName();
-        this.password = userDto.getPassword();
-        this.email = userDto.getEmail();
-        if(userDto.getRole() == null){
-            this.roles = Role.USER;
-        }else {
-            this.roles = userDto.getRole();
-        }
     }
 
     public User(String userName, String firstName, String lastName, String email, String password) {
