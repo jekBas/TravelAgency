@@ -1,5 +1,6 @@
-package org.example.dto;
+package org.example.dto.transformer;
 
+import org.example.dto.UserDto;
 import org.example.model.User;
 
 public class UserDtoTransformer {

@@ -1,5 +1,6 @@
-package org.example.dto;
+package org.example.dto.transformer;
 
+import org.example.dto.HotelDto;
 import org.example.model.Hotel;
 
 public class HotelDtoTransformer {

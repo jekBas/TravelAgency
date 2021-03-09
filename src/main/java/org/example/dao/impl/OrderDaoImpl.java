@@ -1,5 +1,6 @@
-package org.example.dao;
+package org.example.dao.impl;
 
+import org.example.dao.OrderDao;
 import org.example.model.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

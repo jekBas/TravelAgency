@@ -1,7 +1,8 @@
-package org.example.service;
+package org.example.service.impl;
 
 import org.example.dao.RoomDao;
 import org.example.model.Room;
+import org.example.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

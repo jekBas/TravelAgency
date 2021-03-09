@@ -1,5 +1,6 @@
-package org.example.dto;
+package org.example.dto.transformer;
 
+import org.example.dto.RoomDto;
 import org.example.model.Room;
 
 public class RoomDtoTransformer {

@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.example.dto.UserDto;
-import org.example.dto.UserDtoTransformer;
+import org.example.dto.transformer.UserDtoTransformer;
 import org.example.model.Role;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.example.dto.HotelDto;
-import org.example.dto.HotelDtoTransformer;
+import org.example.dto.transformer.HotelDtoTransformer;
 import org.example.dto.HotelFilter;
 import org.example.model.Country;
 import org.example.model.Hotel;
