@@ -69,14 +69,13 @@ public class RoomDaoImpl implements RoomDao {
     @Transactional
     public List<Room> getAvailableRooms(Long hotelId, LocalDate dateFrom, LocalDate dateTo) {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("from Room where id not in(select id from Room room join room.orders ord where " +
+        Query query = session.createNativeQuery("select * from Room where id not in (select room.id from room join orders ord where " +
                         "(:dateFrom between ord.dateFrom and ord.dateTo)" +
                         "or (:dateTo between ord.dateFrom and ord.dateTo)" +
-                        "or (convert(date) between :dateFrom and :dateTo) " +
-                        "or (cast(dateTo as DATE) between :dateFrom and :dateTo))")
-//                        .setParameter("id",hotelId)
-                .setParameter("dateFrom",dateFrom)
-                .setParameter("dateTo",dateTo);
+                        "or (dateFrom between :dateFrom and :dateTo) " +
+                        "or (dateTo between :dateFrom and :dateTo))");
+                query.setParameter("dateFrom",dateFrom);
+                query.setParameter("dateTo",dateTo);
 
         List<Room> rooms = query.getResultList();
         System.out.println(rooms.toString());
