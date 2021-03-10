@@ -46,6 +46,6 @@ public class UserDto {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = role  == null ? Role.USER : role;
     }
 }

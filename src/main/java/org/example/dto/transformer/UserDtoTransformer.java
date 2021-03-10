@@ -1,6 +1,7 @@
 package org.example.dto.transformer;
 
 import org.example.dto.UserDto;
+import org.example.model.Role;
 import org.example.model.User;
 
 public class UserDtoTransformer {
@@ -13,7 +14,7 @@ public class UserDtoTransformer {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getRoles());
+                user.getRoles() == null ? Role.USER : user.getRoles());
     }
 
     public static User convertUserDtoToUser(UserDto userDto) {
@@ -24,7 +25,7 @@ public class UserDtoTransformer {
         user.setLastName(userDto.getLastName());
         user.setEmail(user.getEmail());
         user.setPassword(userDto.getPassword());
-        user.setRoles(userDto.getRole());
+        user.setRoles(userDto.getRole() == null ? Role.USER : userDto.getRole());
 
         return user;
     }
