@@ -1,8 +1,8 @@
 package org.example.service;
 
-import org.example.model.Order;
+import org.example.model.Orders;
 
 public interface OrderService {
 
-    void saveOrder(Order order);
+    void saveOrder(Orders order);
 }

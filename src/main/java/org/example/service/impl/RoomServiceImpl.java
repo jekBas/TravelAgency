@@ -6,6 +6,8 @@ import org.example.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +37,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> getAvailableRooms(Long hotelId, Date dateFrom, Date dateTo) {
+    public List<Room> getAvailableRooms(Long hotelId, LocalDate dateFrom, LocalDate dateTo) {
         return roomDao.getAvailableRooms(hotelId,dateFrom,dateTo);
+    }
+
+    @Override
+    public LocalDate converter(String date) {
+                return LocalDate.parse(date);
     }
 }

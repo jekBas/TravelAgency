@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -41,20 +43,22 @@ public class OrderController {
     }
 
     @GetMapping("/orderForm")
-    public String createOrder(@RequestParam("hotelId") Long id, Model model){
+    public String createOrder(@RequestParam("hotelId")Long id, Model model){
+     model.addAttribute("hotelId",id);
         OrderParameters orderParameters = new OrderParameters();
-        orderParameters.setHotelId(id);
      model.addAttribute("orderParameters",orderParameters);
      return "orderForm";
     }
 
-    @GetMapping("/showRooms")
-    public String showRooms(@ModelAttribute("orderParameters") OrderParameters orderParameters, Model model){
-     List<Room> rooms = roomService.getAvailableRooms(orderParameters.getHotelId(), orderParameters.getDateFrom(),orderParameters.getDateTo());
+    @RequestMapping("/showRooms")
+    public String showRooms(@ModelAttribute("hotelId") Long id,
+                            @ModelAttribute("orderParameters") OrderParameters orderParameters, Model model){
+     orderParameters.setHotelId(id);
+     List<Room> rooms = roomService.getAvailableRooms(orderParameters.getHotelId(),
+             roomService.converter(orderParameters.getDateFrom()),
+                     roomService.converter(orderParameters.getDateTo()));
      model.addAttribute("rooms",rooms);
-        System.out.println(orderParameters.getHotelId());
-        System.out.println(orderParameters.getDateFrom());
-        System.out.println(orderParameters.getDateTo());
+
 
         return "listRooms";
     }

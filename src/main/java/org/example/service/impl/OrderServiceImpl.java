@@ -1,7 +1,7 @@
 package org.example.service.impl;
 
 import org.example.dao.OrderDao;
-import org.example.model.Order;
+import org.example.model.Orders;
 import org.example.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void saveOrder(Order order) {
+    public void saveOrder(Orders order) {
         orderDao.saveOrder(order);
     }
 }

@@ -11,7 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
-import java.util.Date;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -66,19 +67,36 @@ public class RoomDaoImpl implements RoomDao {
 
     @Override
     @Transactional
-    public List<Room> getAvailableRooms(Long hotelId, Date dateFrom, Date dateTo) {
+    public List<Room> getAvailableRooms(Long hotelId, LocalDate dateFrom, LocalDate dateTo) {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery
-                ("select roomType from Room where Room.hotel.id = "+hotelId+" " + //тут помилка в рум.готель.ід
-                        "and Room.id not in" +
-                        "(select Room.id from Room join Order on Room.id = Order.id where " +
-                        "("+dateFrom+" not between Order.dateFrom and Order.dateTo)" +
-                        "or ("+dateTo+" not between Order.dateFrom and Order.dateTo) " +
-                        "or (Order.dateFrom between "+dateFrom+" and "+dateTo+") " +
-                        "or (Order.dateTo between "+dateFrom+" and "+dateTo+"))")
-                .setParameter("hotelId", hotelId)
-                .setParameter("dateFrom", dateFrom)
-                .setParameter("dateTo", dateTo);
-        return query.getResultList();
+        Query query = session.createQuery("from Room where id not in(select id from Room room join room.orders ord where " +
+                        "(:dateFrom between ord.dateFrom and ord.dateTo)" +
+                        "or (:dateTo between ord.dateFrom and ord.dateTo)" +
+                        "or (convert(date) between :dateFrom and :dateTo) " +
+                        "or (cast(dateTo as DATE) between :dateFrom and :dateTo))")
+//                        .setParameter("id",hotelId)
+                .setParameter("dateFrom",dateFrom)
+                .setParameter("dateTo",dateTo);
+
+        List<Room> rooms = query.getResultList();
+        System.out.println(rooms.toString());
+       return rooms;
+
+
+//        Query query1 = session.createQuery("from Room where hotel.id =:id and id not in(:list)")
+//                .setParameter("id",hotelId)
+//                .setParameter("list",identifiers);
+//        return query1.getResultList();
+//        Query query = session.createQuery
+//                ("from Room where id not in" +
+//                        "(select id from Order where " +
+//                        "(:dateFrom not between dateFrom and dateTo)" +
+//                        "or (:dateTo not between dateFrom and dateTo) " +
+//                        "or (dateFrom between :dateFrom and :dateTo) " +
+//                        "or (dateTo between :dateFrom and :dateTo))")
+//                .setParameter("hotelId", hotelId)
+//                .setParameter("dateFrom", dateFrom)
+//                .setParameter("dateTo", dateTo);
+//        return query.getResultList();
     }
 }

@@ -20,15 +20,14 @@
 
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $( function() {
-            $( "#dateFrom" ).datepicker();
+            $( "#dateFrom" ).datepicker({ dateFormat: "yy-mm-dd" });
         } );
         $( function() {
-            $( "#dateTo" ).datepicker();
+            $( "#dateTo" ).datepicker({ dateFormat: "yy-mm-dd" });
         } );
     </script>
 
@@ -91,7 +90,7 @@
      style="background-image: url(https://images.creativemarket.com/0.1.0/ps/1422659/4122/2696/m1/fpnw/wm1/world-map-orange-.jpg?1467641527&s=235e067fec06b0fbd69c747d3d7236ac);">
     <div class="container">
         <h3>FIND YOUR HOTEL</h3>
-        <form:form action="/order/showRooms" modelAttribute="orderParameters" method="get">
+        <form:form action="/order/showRooms" modelAttribute="orderParameters" method="post">
              <span>
             Date from:<input:input type="text" id="dateFrom" path="dateFrom"/>
             Date to:<input:input type="text" id="dateTo" path="dateTo"/>

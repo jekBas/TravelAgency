@@ -1,7 +1,7 @@
 package org.example.dao.impl;
 
 import org.example.dao.OrderDao;
-import org.example.model.Order;
+import org.example.model.Orders;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,7 +20,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     @Transactional
-    public void saveOrder(Order order) {
+    public void saveOrder(Orders order) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();

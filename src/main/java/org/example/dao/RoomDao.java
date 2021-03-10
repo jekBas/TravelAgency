@@ -2,7 +2,10 @@ package org.example.dao;
 
 import org.example.model.Room;
 
-import java.util.Date;
+
+
+import java.time.LocalDate;
+
 import java.util.List;
 
 public interface RoomDao {
@@ -13,5 +16,5 @@ public interface RoomDao {
 
     List<Room> getAllRoomByHotelId(Long id);
 
-    List<Room> getAvailableRooms(Long hotelId, Date dateFrom, Date dateTo);
+    List<Room> getAvailableRooms(Long hotelId, LocalDate dateFrom, LocalDate dateTo);
 }

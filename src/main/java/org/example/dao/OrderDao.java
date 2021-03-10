@@ -1,8 +1,8 @@
 package org.example.dao;
 
-import org.example.model.Order;
+import org.example.model.Orders;
 
 public interface OrderDao {
 
-    void saveOrder(Order order);
+    void saveOrder(Orders order);
 }

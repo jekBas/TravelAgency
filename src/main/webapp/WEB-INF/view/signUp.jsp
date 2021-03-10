@@ -128,7 +128,7 @@
         <label for="Role">
             <span class="tfsu">New password</span> <br>
             <form:select name="roles"  path="role">
-                <form:option value="${roles}"> --Choose role--</form:option>
+                <form:option selected="true" value="USER" />
                 <form:options items="${roles}"></form:options>
             </form:select>
         </label>
