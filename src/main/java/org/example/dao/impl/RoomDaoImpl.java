@@ -66,24 +66,19 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    @Transactional
     public List<Room> getAvailableRooms(Long hotelId, LocalDate dateFrom, LocalDate dateTo) {
         Session session = sessionFactory.openSession();
-        System.out.println(dateFrom);
-        System.out.println(dateTo);
-        System.out.println(dateFrom.toString());
-        System.out.println(dateTo.toString());
-        Query query = session.createNativeQuery("select * from Room where id not in (select room.id from room join orders ord where " +
-                        "('"+dateFrom+"' between ord.dateFrom and ord.dateTo)" +
-                        "or ('"+dateTo+"' between ord.dateFrom and ord.dateTo)" +
-                        "or (dateFrom between '"+dateFrom+"' and '"+dateTo+"') " +
-                        "or (dateTo between '"+dateFrom+"' and '"+dateTo+"'))");
-                query.setParameter("dateFrom",dateFrom);
-                query.setParameter("dateTo",dateTo);
 
-        List<Room> rooms = query.getResultList();
-        System.out.println(rooms.toString());
-       return rooms;
+        Query query = session.createNativeQuery(
+                "select * from room where id not in (select room.id from room join orders ord where " +
+                "('" + dateFrom + "' between ord.dateFrom and ord.dateTo)" +
+                "or ('" + dateTo + "' between ord.dateFrom and ord.dateTo)" +
+                "or (dateFrom between '" + dateFrom + "' and '" + dateTo + "') " +
+                "or (dateTo between '" + dateFrom + "' and '" + dateTo + "'))", Room.class);
+
+            List rooms = query.getResultList();
+
+        return rooms;
 
 
 //        Query query1 = session.createQuery("from Room where hotel.id =:id and id not in(:list)")

@@ -3,8 +3,6 @@ package org.example.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-
-
 @Getter
 @Setter
 public class OrderParameters {
@@ -12,5 +10,4 @@ public class OrderParameters {
 
     private String dateFrom;
     private String dateTo;
-
 }
