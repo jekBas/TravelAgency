@@ -65,11 +65,11 @@
 
 
     <!-- Hibernate core -->
-    <dependency>
-      <groupId>org.hibernate.orm</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>6.0.0.Alpha6</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.hibernate.orm</groupId>-->
+<!--      <artifactId>hibernate-core</artifactId>-->
+<!--      <version>6.0.0.Alpha6</version>-->
+<!--    </dependency>-->
 
     <dependency>
       <groupId>org.hibernate.validator</groupId>
@@ -130,11 +130,11 @@
       <artifactId>passay</artifactId>
       <version>1.6.0</version>
     </dependency>
-      <dependency>
-          <groupId>org.hibernate</groupId>
-          <artifactId>hibernate-core</artifactId>
-          <version>5.4.20.Final</version>
-      </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.4.20.Final</version>
+    </dependency>
   </dependencies>
 
   <build>
