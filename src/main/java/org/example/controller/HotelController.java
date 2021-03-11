@@ -45,7 +45,7 @@ public class HotelController {
             hotelService.saveHotel(HotelDtoTransformer.convertHotelDtoToHotel(hotelDto));
         }
 
-        return "signIn";
+        return "redirect:/hotel/list";
     }
 
     @GetMapping("/list")
