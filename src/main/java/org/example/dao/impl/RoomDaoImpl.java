@@ -46,6 +46,16 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
+    public Room getRoomByID(Long id) {
+        Session session = sessionFactory.openSession();
+        Room room = session.get(Room.class, id);
+        session.close();
+
+        return room;
+    }
+
+
+    @Override
     @Transactional
     public void deleteRoom(Long id) {
         Transaction transaction = null;
