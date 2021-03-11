@@ -13,6 +13,8 @@ public interface RoomDao {
 
     void saveRoom(Room room);
 
+    Room getRoomByID(Long id);
+
     void deleteRoom(Long id);
 
     List<Room> getAllRoomByHotelId(Long id);
