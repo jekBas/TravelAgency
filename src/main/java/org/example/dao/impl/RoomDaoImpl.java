@@ -17,6 +17,7 @@ import javax.persistence.Query;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -91,10 +92,20 @@ public class RoomDaoImpl implements RoomDao {
 
         List<BigInteger> ids = query.getResultList();
 
-        Query query1 = session.createNativeQuery("select id from room where hotel_id = " + hotelId + " and id not in(:identifiers)")
-                .setParameter("identifiers", ids);
+        List<BigInteger> roomIds;
 
-        List<BigInteger> roomIds = query1.getResultList();
+        if(ids.isEmpty()){
+
+            Query query1 = session.createNativeQuery("select id from room where hotel_id = " + hotelId + "");
+            roomIds = query1.getResultList();
+        }else {
+            Query query1 = session.createNativeQuery("select id from room where hotel_id = " + hotelId + " and id not in(:identifiers)")
+                    .setParameter("identifiers", ids);
+            roomIds = query1.getResultList();
+
+        }
+
+
         List<Long> longIds = roomIds.stream().map(i -> i.longValue()).collect(Collectors.toList());
         Set<Long> idSet = new HashSet<>();
         idSet.addAll(longIds);
