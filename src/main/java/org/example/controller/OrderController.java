@@ -72,16 +72,22 @@ public class OrderController {
 
     @RequestMapping("/order")
     public String createOrder(@ModelAttribute("orderParameters") OrderParameters orderParameters, @RequestParam("roomId") Long id,
-                              @AuthenticationPrincipal MyUserDetails userDetails){
-     User user = userService.findByUsername(userDetails.getUsername());
+                              Principal principal){
+     User user = userService.findByUsername(principal.getName());
         System.out.println(user.toString());
+        System.out.println("0");
         Orders orders = new Orders();
+        System.out.println("1");
         orders.setUser(user);
+        System.out.println("2");
         Room room = roomService.getRoomByID(id);
-        System.out.println(room.toString());
+        System.out.println("3");
         orders.setRoom(room);
+        System.out.println("4");
         orders.setDateFrom(roomService.converter(orderParameters.getDateFrom()));
+        System.out.println("5");
         orders.setDateTo(roomService.converter(orderParameters.getDateTo()));
+        System.out.println("6");
      orderService.saveOrder(orders);
 
      return "redirect:/order/all";
