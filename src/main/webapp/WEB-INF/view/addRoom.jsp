@@ -87,6 +87,41 @@
 
             <br>
 
+            <table class="table table-dark table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">All rooms in this hotel</th>
+                </tr>
+                </thead>
+
+            </table>
+            <div class="table table-dark table-striped"
+                 style="position: relative;
+                      height: 200px;
+                       overflow: auto;
+                         display: block; color: #4e555b;opacity: 0.85; margin: auto">
+
+                <table class="table table-dark table-hover">
+                    <thead>
+                    <c:forEach var="rooms" items="${rooms}">
+
+                        <tr>
+                            <td>
+                                <div>${rooms.roomType}</div>
+                            </td>
+
+                        </tr>
+
+                    </c:forEach>
+                    </thead>
+
+                </table>
+
+
+            </div>
+
+            <br>
+
 
             <input  class="form-control btn" name="submit" type="submit" value="Confirm" style="background-color: coral;width:80px;margin-bottom: 8px;margin-top: 8px;">
             <br>

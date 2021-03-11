@@ -65,7 +65,7 @@ public class OrderController {
     @RequestMapping("/order")
     public String createOrder(){
 
-     return "redirect:/hotel/list";
+     return "redirect:/order/all";
     }
 
 
