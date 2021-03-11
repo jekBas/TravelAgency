@@ -2,7 +2,9 @@ package org.example.dao.impl;
 
 import org.example.dao.RoomDao;
 import org.example.model.Hotel;
+import org.example.model.Orders;
 import org.example.model.Room;
+import org.example.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,8 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class RoomDaoImpl implements RoomDao {
@@ -66,35 +72,35 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public List<Room> getAvailableRooms(Long hotelId, LocalDate dateFrom, LocalDate dateTo) {
+    @Transactional
+    public Set<Long> getBookedRoomsId(Long hotelId, LocalDate dateFrom, LocalDate dateTo) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createNativeQuery("select room_id from orders where :dateFrom  between dateFrom and dateTo or :dateTo between dateFrom and dateTo or dateFrom between :dateFrom  and :dateTo or dateTo between :dateFrom  and :dateTo")
+                .setParameter("dateFrom", dateFrom)
+                .setParameter("dateTo", dateTo);
+
+        List<BigInteger> ids = query.getResultList();
+
+        Query query1 = session.createNativeQuery("select id from room where hotel_id = " + hotelId + " and id not in(:identifiers)")
+                .setParameter("identifiers", ids);
+
+        List<BigInteger> roomIds = query1.getResultList();
+        List<Long> longIds = roomIds.stream().map(i -> i.longValue()).collect(Collectors.toList());
+        Set<Long> idSet = new HashSet<>();
+        idSet.addAll(longIds);
+
+
+        return idSet;
+    }
+
+    @Override
+    @Transactional
+    public List<Room> getAvailableRooms(Set<Long> values) {
         Session session = sessionFactory.openSession();
-
-        Query query = session.createNativeQuery(
-                "select * from room where id not in (select room.id from room join orders ord where " +
-                "('" + dateFrom + "' between ord.dateFrom and ord.dateTo)" +
-                "or ('" + dateTo + "' between ord.dateFrom and ord.dateTo)" +
-                "or (dateFrom between '" + dateFrom + "' and '" + dateTo + "') " +
-                "or (dateTo between '" + dateFrom + "' and '" + dateTo + "'))", Room.class);
-
-            List rooms = query.getResultList();
+        Query query = session.createQuery("from Room where id in(:values)")
+                .setParameter("values", values);
+        List<Room> rooms = query.getResultList();
 
         return rooms;
-
-
-//        Query query1 = session.createQuery("from Room where hotel.id =:id and id not in(:list)")
-//                .setParameter("id",hotelId)
-//                .setParameter("list",identifiers);
-//        return query1.getResultList();
-//        Query query = session.createQuery
-//                ("from Room where id not in" +
-//                        "(select id from Order where " +
-//                        "(:dateFrom not between dateFrom and dateTo)" +
-//                        "or (:dateTo not between dateFrom and dateTo) " +
-//                        "or (dateFrom between :dateFrom and :dateTo) " +
-//                        "or (dateTo between :dateFrom and :dateTo))")
-//                .setParameter("hotelId", hotelId)
-//                .setParameter("dateFrom", dateFrom)
-//                .setParameter("dateTo", dateTo);
-//        return query.getResultList();
     }
 }

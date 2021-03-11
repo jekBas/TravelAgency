@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -38,7 +39,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> getAvailableRooms(Long hotelId, LocalDate dateFrom, LocalDate dateTo) {
-        return roomDao.getAvailableRooms(hotelId,dateFrom,dateTo);
+
+       Set<Long> idSet =  roomDao.getBookedRoomsId(hotelId,dateFrom,dateTo);
+      return roomDao.getAvailableRooms(idSet);
     }
 
     @Override

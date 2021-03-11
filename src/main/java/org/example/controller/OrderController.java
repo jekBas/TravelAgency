@@ -53,14 +53,18 @@ public class OrderController {
     @RequestMapping("/showRooms")
     public String showRooms(@ModelAttribute("hotelId") Long id,
                             @ModelAttribute("orderParameters") OrderParameters orderParameters, Model model){
-     orderParameters.setHotelId(id);
-     List<Room> rooms = roomService.getAvailableRooms(orderParameters.getHotelId(),
+     List<Room> rooms = roomService.getAvailableRooms(id,
              roomService.converter(orderParameters.getDateFrom()),
                      roomService.converter(orderParameters.getDateTo()));
      model.addAttribute("rooms",rooms);
 
 
         return "listRooms";
+    }
+
+    @RequestMapping("/order")
+    public String createOrder(){
+     return "listRooms";
     }
 
 

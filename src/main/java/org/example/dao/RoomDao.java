@@ -7,6 +7,7 @@ import org.example.model.Room;
 import java.time.LocalDate;
 
 import java.util.List;
+import java.util.Set;
 
 public interface RoomDao {
 
@@ -16,5 +17,6 @@ public interface RoomDao {
 
     List<Room> getAllRoomByHotelId(Long id);
 
-    List<Room> getAvailableRooms(Long hotelId, LocalDate dateFrom, LocalDate dateTo);
+    List<Room> getAvailableRooms(Set<Long> id);
+    Set<Long> getBookedRoomsId(Long hotelId,LocalDate dateFrom, LocalDate dateTo);
 }

@@ -22,14 +22,7 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
-
-//    @OneToMany(mappedBy = "orders", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+//    @OneToMany(mappedBy = "booking", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 //    private List<Orders> orders;
 
-    public Room() {}
-
-    public Room(RoomType roomType, Hotel hotel) {
-        this.roomType = roomType;
-        this.hotel = hotel;
-    }
 }

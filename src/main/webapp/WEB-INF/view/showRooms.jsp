@@ -79,26 +79,6 @@
         <span class="tfsu">Country</span> <br>
 
 
-        <%--        Attention method GET below--%>
-<%--        <form:form action="/order/inCountry" modelAttribute="filter" method="post">--%>
-
-<%--            <a href="${pageContext.request.contextPath}/hotel/list" class="form-control btn"--%>
-<%--               style="background-color: #46790d;color: white;height:35px;width:100px;margin:auto">--%>
-<%--                <div style="margin: auto">clean filter</div>--%>
-<%--            </a>--%>
-
-<%--            <form:select name="country" path="country">--%>
-<%--                <form:options items="${country}"></form:options>--%>
-
-<%--            </form:select>--%>
-
-
-<%--            <form:errors path="country" cssStyle="color: darkred"/>--%>
-
-
-<%--            <input class="form-control btn" name="submit" type="submit" value="filter"--%>
-<%--                   style="background-color: #46790d;color: white;height:35px;width:100px;margin:auto">--%>
-<%--        </form:form>--%>
 
         <br>
         <br>
