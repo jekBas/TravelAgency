@@ -10,6 +10,8 @@ public interface RoomService {
 
     void saveRoom(Room room);
 
+    Room getRoomByID(Long id);
+
     void deleteRoom(Room room);
 
     List<Room> getAllRoomByHotelId(Long id);

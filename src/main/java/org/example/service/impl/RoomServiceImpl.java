@@ -28,6 +28,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public Room getRoomByID(Long id) {
+        return roomDao.getRoomByID(id);
+    }
+
+    @Override
     public void deleteRoom(Room room) {
         roomDao.deleteRoom(room.getId());
     }
