@@ -23,7 +23,7 @@ public class UserDtoTransformer {
         user.setUserName(userDto.getUserName());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        user.setEmail(user.getEmail());
+        user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
         user.setRoles(userDto.getRole() == null ? Role.USER : userDto.getRole());
 
